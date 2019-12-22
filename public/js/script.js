@@ -44,6 +44,28 @@ setTimeout(() => {
   //fetch($("a#dyn").attr("href")).then(res => res.text()).then(t => {console.log(t)})
   //fetch(location.href.replace($.params.u), `${$.params.u}/tet`).then(res => res.text()).then(t => {console.log(t)})
 
-  fetch(`${location.href}`.replace($.params.u, `${$.params.u}/tet`)).then(res => res.text()).then(t => {console.log(t)})
-  
+  //fetch(`${location.href}`.replace($.params.u, `${$.params.u}/tet`)).then(res => res.text()).then(t => {console.log(t)})
 }, 999);
+
+{
+  window.fixLink = block => {
+    const oLink = $(block)
+      .find(".google-src-text>a")
+      .attr("href");
+    const oText = $(block)
+      .find(".google-src-text>a")
+      .text();
+    const newText = $(block)
+      .find("a")
+      .eq(0)
+      .text();
+
+    console.log({
+      "old Link": oLink,
+      "old Text": oText,
+      "new Text": newText
+    });
+
+    //console.log($(el).attr("href"))
+  };
+}
