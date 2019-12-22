@@ -27,10 +27,11 @@
 //location.assign("https://analate.glitch.me/?")
 
 setTimeout(() => {
-  const oldCommand = $("iframe").outerHtml;
-  console.log($("iframe")[0].contentWindow);
-  var iframe = document.createElement("iframe");
-  var html = `<script>${oldCommand}</script>`;
-  iframe.src = "data:text/html;charset=utf-8," + encodeURI(html);
-  document.body.appendChild(iframe);
+  console.log($("iframe")[0].src)
+  const cmd =
+    "window.top.gtcomm._updaten('en','English','af','en','https://analate.glitch.me/h');";
+  var html = `<script>${cmd}</script>`;
+  console.log($.params.u)
+  $("iframe")[0].src = $("iframe")[0].src.replace($.params.u, "https://gelsenkirchen.de")
+  //$("iframe").src = "data:text/html;charset=utf-8," + encodeURI(html);
 }, 999);
