@@ -12,12 +12,11 @@ const nav = t => {
 
   const toLinkFramed = linkTemplate.replace($.params.u, toLink);
 
+  
+  
   //location.replace(toLinkFramed);
   //window.top
   //location.href = toLinkMasted;
   //history.replaceState(null, null, toLink);
 
-  
-  
-  
 };

@@ -14,9 +14,24 @@ app.use(cors());
 // http://expressjs.com/en/starter/static-files.html
 app.use(express.static("public"));
 
+app.get("*", (req, res, next) => {
+  console.log(req.originalUrl);
+  next();
+  //res.redirect("https://example.com");
+});
+
+
+
 // http://expressjs.com/en/starter/basic-routing.html
-app.get("/", function(request, response) {
-  response.sendFile(__dirname + "/views/index.html");
+app.get("/", (req, res) => {
+  res.sendFile(__dirname + "/views/index.html");
+});
+
+// http://expressjs.com/en/starter/basic-routing.html
+app.get("/link", (req, res) => {
+  res.contentType("text/html;")
+  res.write(`<html><body><a href="https://analate.glitch.me/test">test</a></body></html>`)
+  res.end();
 });
 
 // listen for requests :)

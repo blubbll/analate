@@ -27,11 +27,24 @@
 //location.assign("https://analate.glitch.me/?")
 
 setTimeout(() => {
-  console.log($("iframe")[0].src)
-  const cmd =
-    "window.top.gtcomm._updaten('en','English','af','en','https://analate.glitch.me/h');";
-  var html = `<script>${cmd}</script>`;
-  console.log($.params.u)
-  $("iframe")[0].src = $("iframe")[0].src.replace($.params.u, "https://gelsenkirchen.de")
-  //$("iframe").src = "data:text/html;charset=utf-8," + encodeURI(html);
+  //$("iframe")[0].src = $("iframe")[0].src.replace(
+  //  $.params.u,
+  //  "https://gelsenkirchen.de"
+  //);
+  // $("iframe")[0].src.contents =""
+
+  var anchorElem = document.createElement("a");
+  anchorElem.setAttribute("href", "https://example.com");
+  anchorElem.innerHTML = "keksample";
+
+  document.body.appendChild(anchorElem);
+
+  //location.replace($("a#dyn").attr("href").replace("%3Ftest", "%3Fmonad"));
+
+  //fetch($("a#dyn").attr("href")).then(res => res.text()).then(t => {console.log(t)})
+  //fetch(location.href.replace($.params.u), `${$.params.u}/tet`).then(res => res.text()).then(t => {console.log(t)})
+  console.log(`${location.href}`.replace($.params.u, `${$.params.u}/tet`));
+  
+  fetch(location.href.replace($.params.u), `${$.params.u}/tet`).then(res => res.text()).then(t => {console.log(t)})
+  
 }, 999);
