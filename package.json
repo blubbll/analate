@@ -11,7 +11,8 @@
   },
   "dependencies": {
     "express": "^4.17.1",
-    "cors": "^2.8.5"
+    "cors": "^2.8.5",
+    "node-sass": "^4.13.0"
   },
   "engines": {
     "node": "8.x"

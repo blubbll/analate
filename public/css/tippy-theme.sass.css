@@ -1,0 +1,22 @@
+$border-color: lightgray;
+$bg-color: rgba(0,0,0,.9);
+
+.tippy-tooltip.test-theme {
+  background-color: $bg-color;
+
+  &[data-placement^="top"] .tippy-arrow {
+    border-top-color: $border-color;
+  }
+  &[data-placement^="right"] .tippy-arrow {
+    border-right-color: $border-color;
+  }
+  &[data-placement^="bottom"] .tippy-arrow {
+    border-bottom-color: $border-color;
+  }
+  &[data-placement^="left"] .tippy-arrow {
+    border-left-color: $border-color;
+  }
+  &-svg-arrow {
+    fill: $border-color;
+  }
+}

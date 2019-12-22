@@ -1,0 +1,12 @@
+.tippy-tooltip.test-theme {
+  background-color: rgba(0, 0, 0, 0.4); }
+  .tippy-tooltip.test-theme[data-placement^="top"] .tippy-arrow {
+    border-top-color: lightgray; }
+  .tippy-tooltip.test-theme[data-placement^="right"] .tippy-arrow {
+    border-right-color: lightgray; }
+  .tippy-tooltip.test-theme[data-placement^="bottom"] .tippy-arrow {
+    border-bottom-color: lightgray; }
+  .tippy-tooltip.test-theme[data-placement^="left"] .tippy-arrow {
+    border-left-color: lightgray; }
+  .tippy-tooltip.test-theme-svg-arrow {
+    fill: lightgray; }

@@ -60,22 +60,21 @@ setTimeout(() => {
       .eq(0)
       .text();
 
-    const newHtml = $(block)
-      .find(".google-src-text>a")[0].outerHTML;
+    console.log($(block).find("a").eq(0).prop("outerHTML"))
     
-    console.log(oHtml)
-    
-   $(block).html($(block)
+   $(block).parent().html($(block)
       .find("a")
-      .eq(0).html());
+      .eq(0).prop("outerHTML"));
     
-   $(block).find("a").text(`${newText}`)
+   //$(block).find("a").attr("title", "")
+    
+    $('[data-toggle="tooltip"]').tooltip({html: "KEKS"})
     
     console.log({
       "old Link": oLink,
       "old Text": oText,
       "new Text": newText
-    });*/
+    });
 
     //console.log($(el).attr("href"))
   };

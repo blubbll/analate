@@ -14,8 +14,16 @@ const nav = t => {
 
 };*/
 
-const { fixLink } = window;
+const { fixLink, tippy } = window;
 
 $("nav-link>.notranslate").each((v, el) => {
   fixLink(el);
 });
+
+/* tooltips */
+tippy("a", {
+  content: "I'm a Tippy tooltip!",
+  theme: "test"
+});
+
+const { jQuery } = window;
