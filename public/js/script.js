@@ -60,11 +60,22 @@ setTimeout(() => {
       .eq(0)
       .text();
 
+    const newHtml = $(block)
+      .find(".google-src-text>a")[0].outerHTML;
+    
+    console.log(oHtml)
+    
+   $(block).html($(block)
+      .find("a")
+      .eq(0).html());
+    
+   $(block).find("a").text(`${newText}`)
+    
     console.log({
       "old Link": oLink,
       "old Text": oText,
       "new Text": newText
-    });
+    });*/
 
     //console.log($(el).attr("href"))
   };
