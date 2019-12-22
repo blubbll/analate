@@ -17,7 +17,7 @@ app.use(cors());
 app.use(express.static("public"));
 
 app.get("*", (req, res, next) => {
-  console.log(req.originalUrl);
+  //console.log(req.originalUrl);
   next();
   //res.redirect("https://example.com");
 });

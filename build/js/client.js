@@ -16,14 +16,12 @@ const nav = t => {
 
 const { $, fixLink, tippy } = window;
 
-$("nav-link>.notranslate").each((v, el) => {
-  fixLink(el);
-});
+document.addEventListener("DOMContentLoaded", function(event) {
+  setTimeout(console.clear, 499);
 
-/* tooltips */
-tippy("a", {
-  content: "I'm a Tippy tooltip!",
-  theme: "test"
+  setTimeout(() => {
+    $("nav-link>.notranslate").each((v, el) => {
+      fixLink(el);
+    });
+  }, 999);
 });
-
-const { jQuery } = window;
