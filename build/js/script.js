@@ -1,14 +1,13 @@
-//💜//i love you monad
-var $ = window.$;
+const { $ } = window;
 
 //q
 {
   $.params = {};
-  $.updateQuery = function()  {
+  $.updateQuery = () => {
     var match,
       pl = /\+/g, // Regex for replacing addition symbol with a space
       search = /([^&=]+)=?([^&]*)/g,
-      decode = function(s ) {
+      decode = s => {
         return decodeURIComponent(s.replace(pl, " "));
       },
       query = window.location.search.substring(1);
@@ -22,14 +21,14 @@ var $ = window.$;
 }
 
 {
-  $.updateGt = function(args ) {};
+  $.updateGt = args => {};
 }
 
 //https://skipperkongen.dk/2011/02/05/how-translate-google-com-works/
 //tn_.dom.safe.replaceLocation(tn_b, "https://analate.glitch.me/u")
 //location.assign("https://analate.glitch.me/?")
 
-setTimeout(function()  {
+setTimeout(() => {
   //$("iframe")[0].src = $("iframe")[0].src.replace(
   //  $.params.u,
   //  "https://gelsenkirchen.de"
@@ -51,14 +50,14 @@ setTimeout(function()  {
 }, 999);
 
 {
-  window.fixLink = function(block ) {
-    var oLink = $(block)
+  window.fixLink = block => {
+    const oLink = $(block)
       .find(".google-src-text>a")
       .attr("href");
-    var oText = $(block)
+    const oText = $(block)
       .find(".google-src-text>a")
       .text();
-    var newText = $(block)
+    const newText = $(block)
       .find("a")
       .eq(0)
       .text();

@@ -1,5 +1,5 @@
-$border-color: lightgray;
-$bg-color: rgba(0,0,0,.9);
+$border-color: rgba(255, 255, 255, 0.9);
+$bg-color: rgba(0, 0, 0, 0.9);
 
 .tippy-tooltip.test-theme {
   background-color: $bg-color;
@@ -15,6 +15,9 @@ $bg-color: rgba(0,0,0,.9);
   }
   &[data-placement^="left"] .tippy-arrow {
     border-left-color: $border-color;
+  }
+  &-backdrop {
+    background-color: $bg-color;
   }
   &-svg-arrow {
     fill: $border-color;

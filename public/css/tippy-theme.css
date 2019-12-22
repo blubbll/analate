@@ -1,12 +1,14 @@
 .tippy-tooltip.test-theme {
-  background-color: rgba(0, 0, 0, 0.4); }
+  background-color: rgba(0, 0, 0, 0.9); }
   .tippy-tooltip.test-theme[data-placement^="top"] .tippy-arrow {
-    border-top-color: lightgray; }
+    border-top-color: rgba(255, 255, 255, 0.9); }
   .tippy-tooltip.test-theme[data-placement^="right"] .tippy-arrow {
-    border-right-color: lightgray; }
+    border-right-color: rgba(255, 255, 255, 0.9); }
   .tippy-tooltip.test-theme[data-placement^="bottom"] .tippy-arrow {
-    border-bottom-color: lightgray; }
+    border-bottom-color: rgba(255, 255, 255, 0.9); }
   .tippy-tooltip.test-theme[data-placement^="left"] .tippy-arrow {
-    border-left-color: lightgray; }
+    border-left-color: rgba(255, 255, 255, 0.9); }
+  .tippy-tooltip.test-theme-backdrop {
+    background-color: rgba(0, 0, 0, 0.9); }
   .tippy-tooltip.test-theme-svg-arrow {
-    fill: lightgray; }
+    fill: rgba(255, 255, 255, 0.9); }

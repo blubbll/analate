@@ -1,4 +1,3 @@
-//💜//i love you monad
 //console.log(location.href);
 /*const linkTemplate = $("#templateLink").attr("href");
 const nav = t => {
@@ -15,9 +14,9 @@ const nav = t => {
 
 };*/
 
-var $ = window.$, fixLink = window.fixLink, tippy = window.tippy;
+const { $, fixLink, tippy } = window;
 
-$("nav-link>.notranslate").each(function(v, el)  {
+$("nav-link>.notranslate").each((v, el) => {
   fixLink(el);
 });
 
@@ -27,4 +26,4 @@ tippy("a", {
   theme: "test"
 });
 
-var jQuery = window.jQuery;
+const { jQuery } = window;

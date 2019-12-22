@@ -22,19 +22,45 @@ app.get("*", (req, res, next) => {
   //res.redirect("https://example.com");
 });
 
-//SASS
-{
-  const c = {
-    in: `${__dirname}/public/css/tippy-theme.sass.css`
-  };
+//TRANSPILE
+const es6tr = require("es6-transpiler");
+
+const transpile = file => {
+  var result = es6tr.run({ filename: file });
+  const ext = ".es5";
+  const output = `${file.replace("/build", "/public")}`;
+  //.replace(".js", `.${ext.slice(1)}`)}.js`;
+
+  console.log(`🔥Transpilinmg ${file} to ${output}...`);
+  if (result.src)
+    [
+      fs.writeFileSync(
+        output,
+        `//💜//i love you monad\r\n${result.src.replace(/\0/gi, "")}`
+      ),
+      console.log(`✔️Transpiled ${file} to ${output}!`)
+    ];
+  else console.warn(`⚠️Error at transpiling of file ${file}:`, result);
+};
+
+const compile = file => {
+  const output = file.replace("/build/", "/public/");
+  console.log(`🔥Compiling ${file} to ${output}...`);
   fs.writeFileSync(
-    c.in.replace(".sass", ""),
+    output,
     sass
       .renderSync({
-        data: fs.readFileSync(c.in, "utf8")
+        data: fs.readFileSync(file, "utf8")
       })
       .css.toString("utf8")
   );
+  console.log(`✔️Compiled ${file} to ${output}!`);
+};
+
+if (process.env.PROJECT_NAME) {
+  transpile(`${__dirname}/build/js/script.js`);
+  transpile(`${__dirname}/build/js/client.js`);
+  compile(`${__dirname}/build/css/tippy-theme.css`);
 }
 
 // http://expressjs.com/en/starter/basic-routing.html
