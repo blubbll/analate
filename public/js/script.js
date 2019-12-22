@@ -43,8 +43,7 @@ setTimeout(() => {
 
   //fetch($("a#dyn").attr("href")).then(res => res.text()).then(t => {console.log(t)})
   //fetch(location.href.replace($.params.u), `${$.params.u}/tet`).then(res => res.text()).then(t => {console.log(t)})
-  console.log(`${location.href}`.replace($.params.u, `${$.params.u}/tet`));
-  
-  fetch(location.href.replace($.params.u), `${$.params.u}/tet`).then(res => res.text()).then(t => {console.log(t)})
+
+  fetch(`${location.href}`.replace($.params.u, `${$.params.u}/tet`)).then(res => res.text()).then(t => {console.log(t)})
   
 }, 999);
