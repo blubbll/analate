@@ -55,7 +55,7 @@ var $ = window.$, tippy = window.tippy, alert = window.alert;
   window.initRender = function(cb ) {
     // console.log($("data#content>.notranslate").length);
 
-    var Content = [];
+    var Content = (window.CONTENT = {});
 
     $.each($("data#content>item"), function(i, el)  {
       var ELEMENT = {};
@@ -73,28 +73,22 @@ var $ = window.$, tippy = window.tippy, alert = window.alert;
       });
       var bon = "🍬";
 
-      Object.keys(ELEMENT).forEach(function(key ) {
-        var val = ELEMENT[key];
-        Object.keys(val).forEach(function(key ) {
-          var val = ELEMENT.translated[key];
-          if (val.includes(bon)) {
-            ELEMENT.translated[key] = ELEMENT.translated[key].replace(
-              bon,
-              vars[0]
-            );
-            vars.splice(1); //remove from arr
-          }
-        });
+      Object.keys(ELEMENT.original).forEach(function(key ) {
+        var val = ELEMENT.translated[key];
+        if (val.includes(bon)) {
+          var changed = ELEMENT.translated[key].replace(bon, vars[0]);
+          ELEMENT.original[key] = changed;
+          ELEMENT.translated[key] = changed;
+          vars.splice(1); //remove from arr
+        }
       });
-      /* $.each(ELEMENT.translated, (i, type) => {
-        console.log(type);
-        $.each(type, (i, prop) => {
-          console.log(prop);
-        });
-      });*/
-      console.log(ELEMENT);
+
+      //console.log(ELEMENT);
+      Content[$(el).attr("data-id")] = ELEMENT;
+     
     });
 
+     console.log(Content);
     /* if ($("data#content>.notranslate").length) {
       Content = window.CONTENT = withNormalizedKeys({
         original: JSON.parse(

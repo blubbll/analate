@@ -54,7 +54,7 @@ const { $, tippy, alert } = window;
   window.initRender = cb => {
     // console.log($("data#content>.notranslate").length);
 
-    let Content = [];
+    let Content = (window.CONTENT = {});
 
     $.each($("data#content>item"), (i, el) => {
       const ELEMENT = {};
@@ -72,28 +72,22 @@ const { $, tippy, alert } = window;
       });
       const bon = "🍬";
 
-      Object.keys(ELEMENT).forEach(key => {
-        const val = ELEMENT[key];
-        Object.keys(val).forEach(key => {
-          const val = ELEMENT.translated[key];
-          if (val.includes(bon)) {
-            ELEMENT.translated[key] = ELEMENT.translated[key].replace(
-              bon,
-              vars[0]
-            );
-            vars.splice(1); //remove from arr
-          }
-        });
+      Object.keys(ELEMENT.original).forEach(key => {
+        const val = ELEMENT.translated[key];
+        if (val.includes(bon)) {
+          const changed = ELEMENT.translated[key].replace(bon, vars[0]);
+          ELEMENT.original[key] = changed;
+          ELEMENT.translated[key] = changed;
+          vars.splice(1); //remove from arr
+        }
       });
-      /* $.each(ELEMENT.translated, (i, type) => {
-        console.log(type);
-        $.each(type, (i, prop) => {
-          console.log(prop);
-        });
-      });*/
-      console.log(ELEMENT);
+
+      //console.log(ELEMENT);
+      Content[$(el).attr("data-id")] = ELEMENT;
+     
     });
 
+     console.log(Content);
     /* if ($("data#content>.notranslate").length) {
       Content = window.CONTENT = withNormalizedKeys({
         original: JSON.parse(
