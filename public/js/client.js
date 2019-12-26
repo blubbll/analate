@@ -29,6 +29,7 @@ document.addEventListener("DOMContentLoaded", function(event) {
       Object.keys(Content[key]).forEach(function(key ) {
         var d = val[key]; //data
         var el = $(("#" + key));
+        console.debug((("Filling el #" + key) + ":"), el);
         el.text(d.c); //d.c = content
         el.attr("title", d.t); //title
         el.attr("alt", d.a); //alt tag  for img etc
