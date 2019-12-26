@@ -9,18 +9,18 @@ document.addEventListener("DOMContentLoaded", function(event) {
     fixRender();
     initRender();
 
-    var Content = window.CONTENT;
-    Object.keys(Content).forEach(function(key ) {
-      var val = Content[key];
-      Object.keys(Content[key]).forEach(function(key ) {
-        var d = val[key]; //data
-        var el = $(("#" + key));
-        console.debug((("Filling el #" + key) + ":"), el);
-        el.text(d.c); //d.c = content
-        el.attr("title", d.t); //title
-        el.attr("alt", d.a); //alt tag  for img etc
-        el.attr("placeholder", d.p); //placeholder
+   /* let Content = window.CONTENT;
+    Object.keys(Content).forEach(key => {
+      const val = Content[key];
+      Object.keys(Content[key]).forEach(key => {
+        const d = val[key]; //data
+        const el = $(`#${key}`);
+        console.debug(`Filling el #${key}:`, el);
+        el.text(d.text); //d.c = content
+        el.attr("title", d.title); //title
+        el.attr("alt", d.alt); //alt tag  for img etc
+        el.attr("placeholder", d.placeholder); //placeholder
       });
-    });
+    });*/
   }, 999);
 });

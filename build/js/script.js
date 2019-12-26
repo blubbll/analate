@@ -35,15 +35,13 @@ const { $, tippy, alert } = window;
   };
 
   const sanitize = (input, cut) => {
-    const output = (input.text() || "")
-      .trim()
-      .replace(/(\r\n|\n|\r)/gm, "") //uwu linebreaks are bwad
-      //refix specific chars
-      .replace(/🍩/gi, ".")
-      .replace(/🍬/gi, ",")
+    const output = (input.text() || "").trim().replace(/(\r\n|\n|\r)/gm, ""); //uwu linebreaks are bwad
+    //refix specific chars
+    //.replace(/🍩/gi, ".")
+    //.replace(/🍬/gi, ",")
     //(need to do this as certain languages fuck up commas)
     !cut && input.remove();
-    console.log(output);
+    //console.log(output);
     return output;
   };
 
@@ -54,9 +52,49 @@ const { $, tippy, alert } = window;
   };
 
   window.initRender = cb => {
-    let Content;
-    console.log($("data#content>.notranslate").length);
-    if ($("data#content>.notranslate").length) {
+    // console.log($("data#content>.notranslate").length);
+
+    let Content = [];
+
+    $.each($("data#content>item"), (i, el) => {
+      const ELEMENT = {};
+      const vars = [];
+      $.each($(el).find("prop"), (i, el) => {
+        ELEMENT.original = {
+          [`${$(el).attr("name")}`]: sanitize($(el).find(".google-src-text"))
+        };
+        ELEMENT.translated = {
+          [`${$(el).attr("name")}`]: sanitize($(el).find(".notranslate"))
+        };
+      });
+      $.each($(el).find("variable"), (i, el) => {
+        vars.push($(el).text());
+      });
+      const bon = "🍬";
+
+      Object.keys(ELEMENT).forEach(key => {
+        const val = ELEMENT[key];
+        Object.keys(val).forEach(key => {
+          const val = ELEMENT.translated[key];
+          if (val.includes(bon)) {
+            ELEMENT.translated[key] = ELEMENT.translated[key].replace(
+              bon,
+              vars[0]
+            );
+            vars.splice(1); //remove from arr
+          }
+        });
+      });
+      /* $.each(ELEMENT.translated, (i, type) => {
+        console.log(type);
+        $.each(type, (i, prop) => {
+          console.log(prop);
+        });
+      });*/
+      console.log(ELEMENT);
+    });
+
+    /* if ($("data#content>.notranslate").length) {
       Content = window.CONTENT = withNormalizedKeys({
         original: JSON.parse(
           sanitize($("data#content>.notranslate>.google-src-text"))
@@ -70,7 +108,7 @@ const { $, tippy, alert } = window;
         original: JSON.parse(sanitize($("data#content"))),
         translated: false
       };
-    }
+    }*/
 
     cb && cb();
     console.log(Content);
