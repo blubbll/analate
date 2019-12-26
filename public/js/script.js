@@ -36,26 +36,27 @@ var $ = window.$, tippy = window.tippy, alert = window.alert;
   };
 
   var sanitize = function(input, cut)  {
-    console.log(input.text())
     var output = (input.text() || "")
       .trim()
+      .replace(/(\r\n|\n|\r)/gm, "") //uwu linebreaks are bwad
+      //refix specific chars
       .replace(/🍩/gi, ".")
-      .replace(/🍬/gi, ",") //refix commands
+      .replace(/🍬/gi, ",")
     //(need to do this as certain languages fuck up commas)
     !cut && input.remove();
+    console.log(output);
     return output;
   };
 
-  window.fixRender = function(cb) {
-    
-    $.each($("[x-ct]"), function(i, el) {
-     // console.log(el);
-    })
-    
-  }
-  
+  window.fixRender = function(cb ) {
+    $.each($("[x-ct]"), function(i, el)  {
+      // console.log(el);
+    });
+  };
+
   window.initRender = function(cb ) {
     var Content;
+    console.log($("data#content>.notranslate").length);
     if ($("data#content>.notranslate").length) {
       Content = window.CONTENT = withNormalizedKeys({
         original: JSON.parse(
@@ -64,9 +65,8 @@ var $ = window.$, tippy = window.tippy, alert = window.alert;
         translated: JSON.parse(sanitize($("data#content>.notranslate")))
       });
     } else {
-      
-      document.title="NOT TRANSLATIN"
-      
+      document.title = "NOT TRANSLATIN";
+
       Content = window.CONTENT = {
         original: JSON.parse(sanitize($("data#content"))),
         translated: false
@@ -75,6 +75,5 @@ var $ = window.$, tippy = window.tippy, alert = window.alert;
 
     cb && cb();
     console.log(Content);
-
   };
 }
