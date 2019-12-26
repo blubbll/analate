@@ -14,24 +14,25 @@ const nav = t => {
 
 };*/
 
-const { $, fixLink, tippy } = window;
+const { $, initRender, tippy } = window;
 
 document.addEventListener("DOMContentLoaded", function(event) {
   setTimeout(console.clear, 499);
 
   setTimeout(() => {
-    $(".notranslate[onmouseover]").each((v, el) => {
-      for (var element in el) {
-        if (element.nodeType == Node.TEXT_NODE) {
-          console.log(1);
-        }
-      }
+    initRender();
 
-      console.log($(el).text());
-    });
-
-    $("nav-link>.notranslate").each((v, el) => {
-      //fixLink(el);
+    let Content = window.CONTENT;
+    Object.keys(Content).forEach(key => {
+      const val = Content[key];
+      Object.keys(Content[key]).forEach(key => {
+        const d = val[key]; //data
+        const el = $(`#${key}`);
+        el.text(d.c); //d.c = content
+        el.attr("title", d.t); //title
+        el.attr("alt", d.a); //alt tag  for img etc
+        el.attr("placeholder", d.p); //placeholder
+      });
     });
   }, 999);
 });

@@ -15,24 +15,25 @@ const nav = t => {
 
 };*/
 
-var $ = window.$, fixLink = window.fixLink, tippy = window.tippy;
+var $ = window.$, initRender = window.initRender, tippy = window.tippy;
 
 document.addEventListener("DOMContentLoaded", function(event) {
   setTimeout(console.clear, 499);
 
   setTimeout(function()  {
-    $(".notranslate[onmouseover]").each(function(v, el)  {
-      for (var element in el) {
-        if (element.nodeType == Node.TEXT_NODE) {
-          console.log(1);
-        }
-      }
+    initRender();
 
-      console.log($(el).text());
-    });
-
-    $("nav-link>.notranslate").each(function(v, el)  {
-      //fixLink(el);
+    var Content = window.CONTENT;
+    Object.keys(Content).forEach(function(key ) {
+      var val = Content[key];
+      Object.keys(Content[key]).forEach(function(key ) {
+        var d = val[key]; //data
+        var el = $(("#" + key));
+        el.text(d.c); //d.c = content
+        el.attr("title", d.t); //title
+        el.attr("alt", d.a); //alt tag  for img etc
+        el.attr("placeholder", d.p); //placeholder
+      });
     });
   }, 999);
 });

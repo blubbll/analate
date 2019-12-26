@@ -1,5 +1,5 @@
 //💜//i love you monad
-var $ = window.$, tippy = window.tippy;
+var $ = window.$, tippy = window.tippy, alert = window.alert;
 
 //q
 {
@@ -20,59 +20,57 @@ var $ = window.$, tippy = window.tippy;
 }
 
 {
- 
 }
 
 {
-  window.fixLink = function(block ) {
-    var navBlock = $(block).parent();
+  var sanitize = function(input ) {
+    var output = (input || "").trim().replace(/ · /gi, ".").replace(/·/gi, ".");
+    return output;
+  };
 
-    var _oldLink = $(block).find(".google-src-text>a");
-    var _newLink = $(block)
-      .find("a")
-      .eq(1);
-    //
-    var Old = {
-      href: _oldLink.attr("href"),
-      //
-      text: _oldLink.text(),
-      //
-      title: _oldLink.attr("x-title")
-    };
-    var New = {
-      text: _newLink.text(),
-      //
-      title: _newLink.attr("title"),
-      //
-      html: _newLink.prop("outerHTML")
-    };
+  window.initRender = function(cb ) {
+    var Content;
+    if ($("data#content>.notranslate").length) {
+      Content = window.CONTENT = {
+        original: JSON.parse(
+          sanitize($("data#content>.notranslate>.google-src-text").text())
+        ),
+        translated: JSON.parse(
+          sanitize(
+            $("data#content>.notranslate")
+              .contents()
+              .filter(function() {
+                return this.nodeType == 3;
+              })[0].nodeValue
+          )
+        )
+      };
+    } else {
+      Content = window.CONTENT = {
+        original: JSON.parse(sanitize($("data#content").text())),
+        translated: false
+      };
+    }
 
-    //
-    navBlock.html(New.html);
-    var id = ("link_" + (+new Date()));
-    //
-    navBlock
-      .find("a")
-      .attr("id", id)
-      .attr("title", "");
+    //const rc = (window.RENDER_CONTENT = JSON.parse($("data#content").text()));
 
-    tippy(("#" + id), {
+    //console.log(rc);
+
+    /* tippy(`#${id}`, {
       interactive: 1,
-      content: (("\
-\n          <span class=\"color-goog-blue\">" + (New.title)) + ("</span><br/>\
-\n          " + ("&ndash;".repeat(New.title.length))) + ("<br/>\
-\n            <i class=\"color-goog-orange\">original:</i><br/>\
-\n            " + (Old.text)) + ("&ndash;„<i><span class=\"color-goog-gray\">" + (Old.title)) + "</i>“\
-\n      "),
+      content: `
+          <span class="color-goog-blue">${New.title}</span><br/>
+          ${"&ndash;".repeat(New.title.length)}<br/>
+            <i class="color-goog-orange">original:</i><br/>
+            ${Old.text}&ndash;„<i><span class="color-goog-gray">${
+        Old.title
+      }</i>“
+      `,
       theme: "test"
       //hideOnClick: false,
       //trigger: "click"
     });
-
-    console.log({
-      Old: Old,
-      New: New
-    });
+    */
 
     //console.log($(el).attr("href"))
   };

@@ -30,7 +30,7 @@ const transpile = file => {
   const output = `${file.replace("/build", "/public")}`;
   //.replace(".js", `.${ext.slice(1)}`)}.js`;
 
-  console.log(`🔥Transpilinmg ${file} to ${output}...`);
+  console.log(`🔥Transpiling ${file} to ${output}...`);
   if (result.src)
     [
       fs.writeFileSync(

@@ -1,4 +1,4 @@
-const { $, tippy } = window;
+const { $, tippy, alert } = window;
 
 //q
 {
@@ -19,43 +19,43 @@ const { $, tippy } = window;
 }
 
 {
- 
 }
 
 {
-  window.fixLink = block => {
-    const navBlock = $(block).parent();
+  const sanitize = input => {
+    const output = (input || "").trim().replace(/ · /gi, ".").replace(/·/gi, ".");
+    return output;
+  };
 
-    const _oldLink = $(block).find(".google-src-text>a");
-    const _newLink = $(block)
-      .find("a")
-      .eq(1);
-    //
-    const Old = {
-      href: _oldLink.attr("href"),
-      //
-      text: _oldLink.text(),
-      //
-      title: _oldLink.attr("x-title")
-    };
-    const New = {
-      text: _newLink.text(),
-      //
-      title: _newLink.attr("title"),
-      //
-      html: _newLink.prop("outerHTML")
-    };
+  window.initRender = cb => {
+    let Content;
+    if ($("data#content>.notranslate").length) {
+      Content = window.CONTENT = {
+        original: JSON.parse(
+          sanitize($("data#content>.notranslate>.google-src-text").text())
+        ),
+        translated: JSON.parse(
+          sanitize(
+            $("data#content>.notranslate")
+              .contents()
+              .filter(function() {
+                return this.nodeType == 3;
+              })[0].nodeValue
+          )
+        )
+      };
+    } else {
+      Content = window.CONTENT = {
+        original: JSON.parse(sanitize($("data#content").text())),
+        translated: false
+      };
+    }
 
-    //
-    navBlock.html(New.html);
-    const id = `link_${+new Date()}`;
-    //
-    navBlock
-      .find("a")
-      .attr("id", id)
-      .attr("title", "");
+    //const rc = (window.RENDER_CONTENT = JSON.parse($("data#content").text()));
 
-    tippy(`#${id}`, {
+    //console.log(rc);
+
+    /* tippy(`#${id}`, {
       interactive: 1,
       content: `
           <span class="color-goog-blue">${New.title}</span><br/>
@@ -69,11 +69,7 @@ const { $, tippy } = window;
       //hideOnClick: false,
       //trigger: "click"
     });
-
-    console.log({
-      Old,
-      New
-    });
+    */
 
     //console.log($(el).attr("href"))
   };

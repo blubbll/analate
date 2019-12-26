@@ -42,7 +42,7 @@ body {
   -webkit-background-size: 100% 1px;
   -moz-background-size: 100% 1px;
   background-size: 100% 1px;
-  background-image: -webkit-linear-gradient(to bottom right, #4285F4 0%, #DB4437 100%), -webkit-linear-gradient(to bottom right, #4285F4 0%, #DB4437 100%);
-  background-image: -moz-linear-gradient(to bottom right, #4285F4 0%, #DB4437 100%), -moz-linear-gradient(to bottom right, #4285F4 0%, #DB4437 100%);
-  background-image: -o-linear-gradient(to bottom right, #4285F4 0%, #DB4437 100%), -o-linear-gradient(to bottom right, #4285F4 0%, #DB4437 100%);
-  background-image: linear-gradient(to bottom right, #4285F4 0%, #DB4437 100%), linear-gradient(to bottom right, #4285F4 0%, #DB4437 100%); }
+  background-image: -webkit-linear-gradient(left, #4285F4 0%, #DB4437 100%), -webkit-linear-gradient(left, #4285F4 0%, #DB4437 100%);
+  background-image: -moz-linear-gradient(left, #4285F4 0%, #DB4437 100%), -moz-linear-gradient(left, #4285F4 0%, #DB4437 100%);
+  background-image: -o-linear-gradient(left, #4285F4 0%, #DB4437 100%), -o-linear-gradient(left, #4285F4 0%, #DB4437 100%);
+  background-image: linear-gradient(to right, #4285F4 0%, #DB4437 100%), linear-gradient(to right, #4285F4 0%, #DB4437 100%); }
