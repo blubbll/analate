@@ -37,11 +37,20 @@ const { $, tippy, alert } = window;
   const sanitize = (input, cut) => {
     const output = (input.text() || "")
       .trim()
-      .replace(/\s·|·\s\s/gi, ".");
+      .replace(/\s·|·\s\s/gi, ".")
+      .replace(/،/gi, ",") //remove shitty arabic commas
     !cut && input.remove();
     return output;
   };
 
+  window.fixRender = (cb) =>{
+    
+    $.each($("[x-ct]"), (i, el) =>{
+      console.log(el);
+    })
+    
+  }
+  
   window.initRender = cb => {
     let Content;
     if ($("data#content>.notranslate").length) {
@@ -58,6 +67,7 @@ const { $, tippy, alert } = window;
       };
     }
 
+    cb && cb();
     console.log(Content);
 
   };
