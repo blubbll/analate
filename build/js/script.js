@@ -38,10 +38,10 @@ const { $, tippy, alert } = window;
     console.log(input.text())
     const output = (input.text() || "")
       .trim()
-      .replace(/\s·|·\s\s/gi, ".")
-      .replace(/،/gi, ",") //remove shitty arabic commas
-     // .replace(/""/gi, "\"") //wtf azerbaidchan
-   // !cut && input.remove();
+      .replace(/🍩/gi, ".")
+      .replace(/🍬/gi, ",") //refix commands
+    //(need to do this as certain languages fuck up commas)
+    !cut && input.remove();
     return output;
   };
 
