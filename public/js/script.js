@@ -20,6 +20,10 @@ var $ = window.$, tippy = window.tippy;
 }
 
 {
+ 
+}
+
+{
   window.fixLink = function(block ) {
     var navBlock = $(block).parent();
 
@@ -53,14 +57,16 @@ var $ = window.$, tippy = window.tippy;
       .attr("title", "");
 
     tippy(("#" + id), {
+      interactive: 1,
       content: (("\
-\n        " + (New.title)) + ("<br/>\
+\n          <span class=\"color-goog-blue\">" + (New.title)) + ("</span><br/>\
 \n          " + ("&ndash;".repeat(New.title.length))) + ("<br/>\
-\n          <i style=\"color: orange;\">original:</i><br/>\
-\n          " + (Old.text)) + ("\
-\n          <span style=\"color: dimgray;\">(" + (Old.title)) + ")\
+\n            <i class=\"color-goog-orange\">original:</i><br/>\
+\n            " + (Old.text)) + ("&ndash;„<i><span class=\"color-goog-gray\">" + (Old.title)) + "</i>“\
 \n      "),
       theme: "test"
+      //hideOnClick: false,
+      //trigger: "click"
     });
 
     console.log({

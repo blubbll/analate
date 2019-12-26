@@ -19,6 +19,10 @@ const { $, tippy } = window;
 }
 
 {
+ 
+}
+
+{
   window.fixLink = block => {
     const navBlock = $(block).parent();
 
@@ -52,14 +56,18 @@ const { $, tippy } = window;
       .attr("title", "");
 
     tippy(`#${id}`, {
+      interactive: 1,
       content: `
-        ${New.title}<br/>
+          <span class="color-goog-blue">${New.title}</span><br/>
           ${"&ndash;".repeat(New.title.length)}<br/>
-          <i style="color: orange;">original:</i><br/>
-          ${Old.text}
-          <span style="color: dimgray;">(${Old.title})
+            <i class="color-goog-orange">original:</i><br/>
+            ${Old.text}&ndash;„<i><span class="color-goog-gray">${
+        Old.title
+      }</i>“
       `,
       theme: "test"
+      //hideOnClick: false,
+      //trigger: "click"
     });
 
     console.log({

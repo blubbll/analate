@@ -21,8 +21,18 @@ document.addEventListener("DOMContentLoaded", function(event) {
   setTimeout(console.clear, 499);
 
   setTimeout(function()  {
+    $(".notranslate[onmouseover]").each(function(v, el)  {
+      for (var element in el) {
+        if (element.nodeType == Node.TEXT_NODE) {
+          console.log(1);
+        }
+      }
+
+      console.log($(el).text());
+    });
+
     $("nav-link>.notranslate").each(function(v, el)  {
-      fixLink(el);
+      //fixLink(el);
     });
   }, 999);
 });

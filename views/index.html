@@ -26,9 +26,9 @@
 
     <link rel="stylesheet" href="./css/lib/bs.css" />
     <link rel="stylesheet" href="./css/lib/fluent.css" />
-    <link rel="stylesheet" href="./css/lib/tippy.css" />
-    <link rel="stylesheet" href="./css/lib/bs-theme.css" />
+    <link rel="stylesheet" href="./css/bs-theme.css" />
     <link rel="stylesheet" href="./css/tippy-theme.css" />
+    <link rel="stylesheet" href="./css/custom.css" />
   </head>
   <body>
     <a href="./" id="templateLink" style="display:none;"></a>
@@ -42,8 +42,8 @@
                 class="nav-link active"
                 title="go to home"
                 x-title="go to home"
-                href="~/de/"
                 onclick="nav(this)"
+                role="button"
                 >Home</a
               >
             </nav-link>
@@ -71,26 +71,24 @@
         </div>
       </header>
 
+      <data id="content" style="display: nonke;">
+        { "1": { c: "This is a test·", a: "", p: "", t:"" }, "2": {c: "This is
+        another test·" }}
+      </data>
+
       <main role="main" class="inner cover">
-        <h1 class="cover-heading">Cover your page.</h1>
+        <h1 class="cover-heading" id="1"></h1>
+        <p class="lead" id="2"></p>
         <p class="lead">
-          Cover is a one-page template for building simple and beautiful home
-          pages. Download, edit the text, and add your own fullscreen background
-          photo to make it your own.
-        </p>
-        <p class="lead">
-          <a href="./?test" class="btn btn-lg btn-secondary" id="dyn"
-            >Learn more</a
-          >
+          <a href="./?test" class="btn btn-lg btn-secondary" id="3"></a>
         </p>
       </main>
 
       <footer class="mastfoot mt-auto">
         <div class="inner">
-          <p>
-            Cover template for
-            <a href="https://getbootstrap.com/">Bootstrap</a>, by
-            <a href="https://twitter.com/mdo">@mdo</a>.
+          <p id="4">
+            <a id="5" href="https://getbootstrap.com/"></a>
+            <a id="6" href="https://twitter.com/mdo"></a>.
           </p>
         </div>
       </footer>

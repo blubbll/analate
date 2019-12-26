@@ -1,0 +1,12 @@
+.color-goog-orange {
+  color: #dd4b39; }
+
+.color-goog-gray {
+  color: #333; }
+
+.color-goog-blue {
+  color: #4285f4; }
+
+/* hide google crap */
+#google-infowindow, .gmnoprint {
+  display: none; }

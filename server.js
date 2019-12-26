@@ -22,9 +22,8 @@ app.get("*", (req, res, next) => {
   //res.redirect("https://example.com");
 });
 
-//TRANSPILE
+//TRANSPILE es6 js to es5
 const es6tr = require("es6-transpiler");
-
 const transpile = file => {
   var result = es6tr.run({ filename: file });
   const ext = ".es5";
@@ -43,6 +42,7 @@ const transpile = file => {
   else console.warn(`⚠️Error at transpiling of file ${file}:`, result);
 };
 
+//compile sass function
 const compile = file => {
   const output = file.replace("/build/", "/public/");
   console.log(`🔥Compiling ${file} to ${output}...`);
@@ -61,6 +61,8 @@ if (process.env.PROJECT_NAME) {
   transpile(`${__dirname}/build/js/script.js`);
   transpile(`${__dirname}/build/js/client.js`);
   compile(`${__dirname}/build/css/tippy-theme.css`);
+  compile(`${__dirname}/build/css/custom.css`);
+   compile(`${__dirname}/build/css/bs-theme.css`);
 }
 
 // http://expressjs.com/en/starter/basic-routing.html
