@@ -35,18 +35,20 @@ const { $, tippy, alert } = window;
   };
 
   const sanitize = (input, cut) => {
+    console.log(input.text())
     const output = (input.text() || "")
       .trim()
       .replace(/\s·|·\s\s/gi, ".")
       .replace(/،/gi, ",") //remove shitty arabic commas
-    !cut && input.remove();
+     // .replace(/""/gi, "\"") //wtf azerbaidchan
+   // !cut && input.remove();
     return output;
   };
 
   window.fixRender = (cb) =>{
     
     $.each($("[x-ct]"), (i, el) =>{
-      console.log(el);
+     // console.log(el);
     })
     
   }
@@ -61,6 +63,9 @@ const { $, tippy, alert } = window;
         translated: JSON.parse(sanitize($("data#content>.notranslate")))
       });
     } else {
+      
+      document.title="NOT TRANSLATIN"
+      
       Content = window.CONTENT = {
         original: JSON.parse(sanitize($("data#content"))),
         translated: false
