@@ -64,7 +64,7 @@ const { $, tippy, alert } = window;
       $.each($(item).find("prop"), (i, el) => {
         [
           (ELEMENT.original[`${$(el).attr("name")}`] = sanitize(
-            $(el).find(".google-src-text")
+            gt ? $(el).find(".google-src-text") : $(el)
           ))
         ];
 

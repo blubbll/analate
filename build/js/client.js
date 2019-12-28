@@ -7,23 +7,19 @@ document.addEventListener("DOMContentLoaded", function(event) {
     initRender();
 
     let Content = window.CONTENT;
+
+    const gt = window.wasTranslated();
+
     Object.keys(Content).forEach(id => {
-      const types = Content[id];
+      const d = gt ? Content[id].translated : Content[id].original; //data
+      const el = $(`#${id}`);
+      console.debug(`Filling el #${id}:`, el);
 
-      console.log(types.translated)
-      
-     /*   const d = types[type]; //data
-        const el = $(`#${id}`);
-        console.debug(`Filling el #${id}:`, el);
+      el.text(d.text);
 
-        console.log(type)
-        
-        el.text(d.text);
-
-        el.attr("title", d.title); //title
-        el.attr("alt", d.alt); //alt tag  for img etc
-        el.attr("placeholder", d.placeholder); //placeholder
-      */
+      el.attr("title", d.title); //title
+      el.attr("alt", d.alt); //alt tag  for img etc
+      el.attr("placeholder", d.placeholder); //placeholder
     });
   }, 999);
 });
