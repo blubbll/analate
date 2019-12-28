@@ -1,5 +1,5 @@
 //💜//i love you monad
-var $ = window.$, tippy = window.tippy, alert = window.alert;
+var DEBUG = window.DEBUG, $ = window.$, tippy = window.tippy, alert = window.alert;
 
 //q
 {
@@ -20,6 +20,7 @@ var $ = window.$, tippy = window.tippy, alert = window.alert;
 }
 
 {
+  window.DEBUG = 1;
 }
 
 {
@@ -37,10 +38,6 @@ var $ = window.$, tippy = window.tippy, alert = window.alert;
 
   var sanitize = function(input, cut)  {
     var output = (input.text() || "").trim().replace(/(\r\n|\n|\r)/gm, ""); //uwu linebreaks are bwad
-    //refix specific chars
-    //.replace(/🍩/gi, ".")
-    //.replace(/🍬/gi, ",")
-    //(need to do this as certain languages fuck up commas)
     !cut && input.remove();
     //console.log(output);
     return output;
@@ -58,14 +55,17 @@ var $ = window.$, tippy = window.tippy, alert = window.alert;
     var Content = (window.CONTENT = {});
 
     $.each($("data#content>item"), function(i, item)  {
-      var ELEMENT = { original: {}, translated: {} };
-      var vars = [];
+      var ELEMENT = { original: {}, translated: {}, vars: [] };
       var id = $(item).attr("data-id");
 
       $.each($(item).find("prop"), function(i, el)  {
+        $.each($(el).find("var"), function(i, Var)  {
+          ELEMENT.vars.push($(Var).text());
+        });
+
         [
           (ELEMENT.original[("" + ($(el).attr("name")))] = sanitize(
-            gt ? $(el).find(".google-src-text") : $(el)
+            gt ? $(el).find(".google-src-text") : $(el).find("t")
           ))
         ];
 
@@ -74,44 +74,35 @@ var $ = window.$, tippy = window.tippy, alert = window.alert;
             $(el).find(".notranslate")
           ))
         ];
-      });
-      $.each($(item).find("variable"), function(i, el)  {
-        vars.push($(el).text());
-      });
-      var bon = "🍬";
 
-      gt //was translated
-        ? Object.keys(ELEMENT.original).forEach(function(key ) {
-            var val = ELEMENT.translated[key];
-            if (val.includes(bon)) {
-              var changed = ELEMENT.translated[key];
-              vars.forEach(function(_val, _key)  {
-                changed = changed.replace(bon, _val);
-              });
+        //vars
+        var bon = "⚛";
+        Object.keys(ELEMENT.original).forEach(function(key ) {
+          ELEMENT.vars.forEach(function(_var ) {
+            var t = ELEMENT.original[key];
 
-              ELEMENT.original[key] = changed;
-              ELEMENT.translated[key] = changed;
-            }
-          })
-        : //without google translate
-          Object.keys(ELEMENT.original).forEach(function(key ) {
-            var val = ELEMENT.original[key];
-            if (val.includes(bon)) {
-              var changed = ELEMENT.original[key];
-              vars.forEach(function(_val, _key)  {
-                changed = changed.replace(bon, _val);
-              });
-
-              ELEMENT.original[key] = changed;
+            //if text includes variable
+            if (t.includes(bon)) {
+              //replace in original
+              ELEMENT.original[key] = t.replace(bon, _var);
+              //replace in translated
+              gt && [
+                (ELEMENT.translated[key] = ELEMENT.translated[key].replace(
+                  bon,
+                  _var
+                ))
+              ];
             }
           });
+        });
+      });
 
       //put element into correct id
       Content[id] = ELEMENT;
     });
 
     !gt && [(document.title = "NOT TRANSLATED")];
-    console.log(Content);
+    DEBUG && console.debug(Content);
 
     cb && cb();
   };

@@ -62,7 +62,8 @@ if (process.env.PROJECT_NAME) {
   transpile(`${__dirname}/build/js/client.js`);
   compile(`${__dirname}/build/css/tippy-theme.css`);
   compile(`${__dirname}/build/css/custom.css`);
-   compile(`${__dirname}/build/css/bs-theme.css`);
+  compile(`${__dirname}/build/css/bs-theme.css`);
+  compile(`${__dirname}/build/css/loader.css`);
 }
 
 // http://expressjs.com/en/starter/basic-routing.html

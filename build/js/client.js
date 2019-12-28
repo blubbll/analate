@@ -1,6 +1,9 @@
-const { $, needRender, initRender, tippy } = window;
+const { DEBUG, $, needRender, initRender, tippy } = window;
 
-document.addEventListener("DOMContentLoaded", function(event) {
+//localized "Translating..."-msg
+$("placeholder.loading").text($("verb-0").attr("title"));
+
+document.addEventListener("DOMContentLoaded", event => {
   setTimeout(console.clear, 499);
 
   setTimeout(() => {
@@ -13,13 +16,18 @@ document.addEventListener("DOMContentLoaded", function(event) {
     Object.keys(Content).forEach(id => {
       const d = gt ? Content[id].translated : Content[id].original; //data
       const el = $(`#${id}`);
-      console.debug(`Filling el #${id}:`, el);
+      DEBUG && console.debug(`Filling el #${id}:`, el);
 
       el.text(d.text);
-
       el.attr("title", d.title); //title
       el.attr("alt", d.alt); //alt tag  for img etc
       el.attr("placeholder", d.placeholder); //placeholder
+
+      //done
+      setTimeout(() => {
+        $("#content-wrapper placeholder").removeClass("loading");
+        $("gtp .loader").css({ display: "none" });
+      }, 99);
     });
   }, 999);
 });

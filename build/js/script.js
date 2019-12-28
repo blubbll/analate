@@ -1,4 +1,4 @@
-const { $, tippy, alert } = window;
+const { DEBUG, $, tippy, alert } = window;
 
 //q
 {
@@ -19,6 +19,7 @@ const { $, tippy, alert } = window;
 }
 
 {
+  window.DEBUG = 1;
 }
 
 {
@@ -36,10 +37,6 @@ const { $, tippy, alert } = window;
 
   const sanitize = (input, cut) => {
     const output = (input.text() || "").trim().replace(/(\r\n|\n|\r)/gm, ""); //uwu linebreaks are bwad
-    //refix specific chars
-    //.replace(/🍩/gi, ".")
-    //.replace(/🍬/gi, ",")
-    //(need to do this as certain languages fuck up commas)
     !cut && input.remove();
     //console.log(output);
     return output;
@@ -57,14 +54,17 @@ const { $, tippy, alert } = window;
     let Content = (window.CONTENT = {});
 
     $.each($("data#content>item"), (i, item) => {
-      const ELEMENT = { original: {}, translated: {} };
-      const vars = [];
+      const ELEMENT = { original: {}, translated: {}, vars: [] };
       const id = $(item).attr("data-id");
 
       $.each($(item).find("prop"), (i, el) => {
+        $.each($(el).find("var"), (i, Var) => {
+          ELEMENT.vars.push($(Var).text());
+        });
+
         [
           (ELEMENT.original[`${$(el).attr("name")}`] = sanitize(
-            gt ? $(el).find(".google-src-text") : $(el)
+            gt ? $(el).find(".google-src-text") : $(el).find("t")
           ))
         ];
 
@@ -73,44 +73,35 @@ const { $, tippy, alert } = window;
             $(el).find(".notranslate")
           ))
         ];
-      });
-      $.each($(item).find("variable"), (i, el) => {
-        vars.push($(el).text());
-      });
-      const bon = "🍬";
 
-      gt //was translated
-        ? Object.keys(ELEMENT.original).forEach(key => {
-            const val = ELEMENT.translated[key];
-            if (val.includes(bon)) {
-              let changed = ELEMENT.translated[key];
-              vars.forEach((_val, _key) => {
-                changed = changed.replace(bon, _val);
-              });
+        //vars
+        const bon = "⚛";
+        Object.keys(ELEMENT.original).forEach(key => {
+          ELEMENT.vars.forEach(_var => {
+            const t = ELEMENT.original[key];
 
-              ELEMENT.original[key] = changed;
-              ELEMENT.translated[key] = changed;
-            }
-          })
-        : //without google translate
-          Object.keys(ELEMENT.original).forEach(key => {
-            const val = ELEMENT.original[key];
-            if (val.includes(bon)) {
-              let changed = ELEMENT.original[key];
-              vars.forEach((_val, _key) => {
-                changed = changed.replace(bon, _val);
-              });
-
-              ELEMENT.original[key] = changed;
+            //if text includes variable
+            if (t.includes(bon)) {
+              //replace in original
+              ELEMENT.original[key] = t.replace(bon, _var);
+              //replace in translated
+              gt && [
+                (ELEMENT.translated[key] = ELEMENT.translated[key].replace(
+                  bon,
+                  _var
+                ))
+              ];
             }
           });
+        });
+      });
 
       //put element into correct id
       Content[id] = ELEMENT;
     });
 
     !gt && [(document.title = "NOT TRANSLATED")];
-    console.log(Content);
+    DEBUG && console.debug(Content);
 
     cb && cb();
   };

@@ -1,7 +1,10 @@
 //💜//i love you monad
-var $ = window.$, needRender = window.needRender, initRender = window.initRender, tippy = window.tippy;
+var DEBUG = window.DEBUG, $ = window.$, needRender = window.needRender, initRender = window.initRender, tippy = window.tippy;
 
-document.addEventListener("DOMContentLoaded", function(event) {
+//localized "Translating..."-msg
+$("placeholder.loading").text($("verb-0").attr("title"));
+
+document.addEventListener("DOMContentLoaded", function(event ) {
   setTimeout(console.clear, 499);
 
   setTimeout(function()  {
@@ -14,13 +17,18 @@ document.addEventListener("DOMContentLoaded", function(event) {
     Object.keys(Content).forEach(function(id ) {
       var d = gt ? Content[id].translated : Content[id].original; //data
       var el = $(("#" + id));
-      console.debug((("Filling el #" + id) + ":"), el);
+      DEBUG && console.debug((("Filling el #" + id) + ":"), el);
 
       el.text(d.text);
-
       el.attr("title", d.title); //title
       el.attr("alt", d.alt); //alt tag  for img etc
       el.attr("placeholder", d.placeholder); //placeholder
+
+      //done
+      setTimeout(function()  {
+        $("#content-wrapper placeholder").removeClass("loading");
+        $("gtp .loader").css({ display: "none" });
+      }, 99);
     });
   }, 999);
 });
