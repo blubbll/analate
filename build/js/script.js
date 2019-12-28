@@ -45,66 +45,73 @@ const { $, tippy, alert } = window;
     return output;
   };
 
-  window.fixRender = cb => {
-    $.each($("[x-ct]"), (i, el) => {
-      // console.log(el);
-    });
+  window.wasTranslated = () => {
+    return $("#google-infowindow").length > 0;
   };
 
   window.initRender = cb => {
     // console.log($("data#content>.notranslate").length);
 
+    const gt = window.wasTranslated();
+
     let Content = (window.CONTENT = {});
 
-    $.each($("data#content>item"), (i, el) => {
-      const ELEMENT = {};
+    $.each($("data#content>item"), (i, item) => {
+      const ELEMENT = { original: {}, translated: {} };
       const vars = [];
-      $.each($(el).find("prop"), (i, el) => {
-        ELEMENT.original = {
-          [`${$(el).attr("name")}`]: sanitize($(el).find(".google-src-text"))
-        };
-        ELEMENT.translated = {
-          [`${$(el).attr("name")}`]: sanitize($(el).find(".notranslate"))
-        };
+      const id = $(item).attr("data-id");
+
+      $.each($(item).find("prop"), (i, el) => {
+        [
+          (ELEMENT.original[`${$(el).attr("name")}`] = sanitize(
+            $(el).find(".google-src-text")
+          ))
+        ];
+
+        gt && [
+          (ELEMENT.translated[`${$(el).attr("name")}`] = sanitize(
+            $(el).find(".notranslate")
+          ))
+        ];
       });
-      $.each($(el).find("variable"), (i, el) => {
+      $.each($(item).find("variable"), (i, el) => {
         vars.push($(el).text());
       });
       const bon = "🍬";
 
-      Object.keys(ELEMENT.original).forEach(key => {
-        const val = ELEMENT.translated[key];
-        if (val.includes(bon)) {
-          const changed = ELEMENT.translated[key].replace(bon, vars[0]);
-          ELEMENT.original[key] = changed;
-          ELEMENT.translated[key] = changed;
-          vars.splice(1); //remove from arr
-        }
-      });
+      gt //was translated
+        ? Object.keys(ELEMENT.original).forEach(key => {
+            const val = ELEMENT.translated[key];
+            if (val.includes(bon)) {
+              let changed = ELEMENT.translated[key];
+              vars.forEach((_val, _key) => {
+                changed = changed.replace(bon, _val);
+              });
 
-      //console.log(ELEMENT);
-      Content[$(el).attr("data-id")] = ELEMENT;
-     
+              ELEMENT.original[key] = changed;
+              ELEMENT.translated[key] = changed;
+            }
+          })
+        : //without google translate
+          Object.keys(ELEMENT.original).forEach(key => {
+            const val = ELEMENT.original[key];
+            if (val.includes(bon)) {
+              let changed = ELEMENT.original[key];
+              vars.forEach((_val, _key) => {
+                changed = changed.replace(bon, _val);
+              });
+
+              ELEMENT.original[key] = changed;
+            }
+          });
+
+      //put element into correct id
+      Content[id] = ELEMENT;
     });
 
-     console.log(Content);
-    /* if ($("data#content>.notranslate").length) {
-      Content = window.CONTENT = withNormalizedKeys({
-        original: JSON.parse(
-          sanitize($("data#content>.notranslate>.google-src-text"))
-        ),
-        translated: JSON.parse(sanitize($("data#content>.notranslate")))
-      });
-    } else {
-      document.title = "NOT TRANSLATIN";
-
-      Content = window.CONTENT = {
-        original: JSON.parse(sanitize($("data#content"))),
-        translated: false
-      };
-    }*/
+    !gt && [(document.title = "NOT TRANSLATED")];
+    console.log(Content);
 
     cb && cb();
-    console.log(Content);
   };
 }

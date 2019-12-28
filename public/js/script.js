@@ -46,66 +46,73 @@ var $ = window.$, tippy = window.tippy, alert = window.alert;
     return output;
   };
 
-  window.fixRender = function(cb ) {
-    $.each($("[x-ct]"), function(i, el)  {
-      // console.log(el);
-    });
+  window.wasTranslated = function()  {
+    return $("#google-infowindow").length > 0;
   };
 
   window.initRender = function(cb ) {
     // console.log($("data#content>.notranslate").length);
 
+    var gt = window.wasTranslated();
+
     var Content = (window.CONTENT = {});
 
-    $.each($("data#content>item"), function(i, el)  {
-      var ELEMENT = {};
+    $.each($("data#content>item"), function(i, item)  {
+      var ELEMENT = { original: {}, translated: {} };
       var vars = [];
-      $.each($(el).find("prop"), function(i, el)  {var DP$0 = Object.defineProperty;
-        ELEMENT.original = DP$0({},
-          ("" + ($(el).attr("name"))),{"value": sanitize($(el).find(".google-src-text")),"configurable":true,"enumerable":true,"writable":true}
-        );
-        ELEMENT.translated = DP$0({},
-          ("" + ($(el).attr("name"))),{"value": sanitize($(el).find(".notranslate")),"configurable":true,"enumerable":true,"writable":true}
-        );
+      var id = $(item).attr("data-id");
+
+      $.each($(item).find("prop"), function(i, el)  {
+        [
+          (ELEMENT.original[("" + ($(el).attr("name")))] = sanitize(
+            $(el).find(".google-src-text")
+          ))
+        ];
+
+        gt && [
+          (ELEMENT.translated[("" + ($(el).attr("name")))] = sanitize(
+            $(el).find(".notranslate")
+          ))
+        ];
       });
-      $.each($(el).find("variable"), function(i, el)  {
+      $.each($(item).find("variable"), function(i, el)  {
         vars.push($(el).text());
       });
       var bon = "🍬";
 
-      Object.keys(ELEMENT.original).forEach(function(key ) {
-        var val = ELEMENT.translated[key];
-        if (val.includes(bon)) {
-          var changed = ELEMENT.translated[key].replace(bon, vars[0]);
-          ELEMENT.original[key] = changed;
-          ELEMENT.translated[key] = changed;
-          vars.splice(1); //remove from arr
-        }
-      });
+      gt //was translated
+        ? Object.keys(ELEMENT.original).forEach(function(key ) {
+            var val = ELEMENT.translated[key];
+            if (val.includes(bon)) {
+              var changed = ELEMENT.translated[key];
+              vars.forEach(function(_val, _key)  {
+                changed = changed.replace(bon, _val);
+              });
 
-      //console.log(ELEMENT);
-      Content[$(el).attr("data-id")] = ELEMENT;
-     
+              ELEMENT.original[key] = changed;
+              ELEMENT.translated[key] = changed;
+            }
+          })
+        : //without google translate
+          Object.keys(ELEMENT.original).forEach(function(key ) {
+            var val = ELEMENT.original[key];
+            if (val.includes(bon)) {
+              var changed = ELEMENT.original[key];
+              vars.forEach(function(_val, _key)  {
+                changed = changed.replace(bon, _val);
+              });
+
+              ELEMENT.original[key] = changed;
+            }
+          });
+
+      //put element into correct id
+      Content[id] = ELEMENT;
     });
 
-     console.log(Content);
-    /* if ($("data#content>.notranslate").length) {
-      Content = window.CONTENT = withNormalizedKeys({
-        original: JSON.parse(
-          sanitize($("data#content>.notranslate>.google-src-text"))
-        ),
-        translated: JSON.parse(sanitize($("data#content>.notranslate")))
-      });
-    } else {
-      document.title = "NOT TRANSLATIN";
-
-      Content = window.CONTENT = {
-        original: JSON.parse(sanitize($("data#content"))),
-        translated: false
-      };
-    }*/
+    !gt && [(document.title = "NOT TRANSLATED")];
+    console.log(Content);
 
     cb && cb();
-    console.log(Content);
   };
 }
