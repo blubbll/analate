@@ -57,20 +57,14 @@ const genHtml = input => {
   </div>
 </item>*/
 
-const exData = ""
-
-app.get("/ex", (req, res) => {
-  res.send(
-    genHtml({
-      nav_home: {
-        content: {
-          text: "Homepage",
-          title: "This is a 🌿💮 test"
-        },
-        vars: ["cool"]
-      }
-    })
-  );
+const exData = genHtml({
+  nav_home: {
+    content: {
+      text: "Homepage",
+      title: "This is a 🌿💮 test"
+    },
+    
+  }
 });
 
 //TRANSPILE es6 js to es5
@@ -116,13 +110,17 @@ if (process.env.PROJECT_NAME) {
   compile(`${__dirname}/build/css/bs-theme.css`);
   compile(`${__dirname}/build/css/loader.css`);
 }
-
+app.set("view engine", "ejs");
 // http://expressjs.com/en/starter/basic-routing.html
 app.get("/", (req, res) => {
   //res.sendFile(__dirname + "/views/index.html");
-  ejs.renderFile(filename, data, options, function(err, str) {
-    // str => Rendered HTML string
-  });
+  ejs.renderFile(
+    `${__dirname}/views/index.ejs.html`,
+    { data: exData },
+    (err, str) => {
+      err ? console.warn(err) : res.send(str);
+    }
+  );
 });
 
 // http://expressjs.com/en/starter/basic-routing.html

@@ -57,13 +57,13 @@ const { DEBUG, $, tippy, alert } = window;
       const id = $(item).attr("data-id");
 
       $.each($(item).find("prop"), (i, el) => {
-        $.each($(el).find("var"), (i, Var) => {
+        $.each($(el).find("v"), (i, Var) => {
           ELEMENT.vars.push($(Var).text());
         });
 
         [
           (ELEMENT.original[`${$(el).attr("name")}`] = sanitize(
-            gt ? $(el).find(".google-src-text") : $(el).find("t")
+            gt ? $(el).find(".google-src-text") : $(el).find("c")
           ))
         ];
 
