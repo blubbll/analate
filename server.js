@@ -67,7 +67,7 @@ const genHtml = input => {
 </item>
 */
 
-const bon = `&diams;`;
+const bon = `🃁🃏`;
 const exData = genHtml({
   1: {
     text: { c: "This is a heading" },

@@ -35,7 +35,7 @@ var DEBUG = window.DEBUG, $ = window.$, tippy = window.tippy, alert = window.ale
     return $("#google-infowindow").length > 0;
   };
 
-  window.initRender = function(original ) {
+  window.initRender = function(cb ) {
     // console.log($("data#content>.notranslate").length);
 
     var gt = window.wasTranslated();
@@ -93,7 +93,7 @@ var DEBUG = window.DEBUG, $ = window.$, tippy = window.tippy, alert = window.ale
         ];
 
         //vars original
-        var bon = ("♦");
+        var bon = ("🃁🃏");
         Object.keys(ELEMENT.original).forEach(function(key ) {
           ELEMENT.original[("" + ($(prop).attr("name")))].vars.forEach(function(_var ) {
             //content
@@ -129,6 +129,19 @@ var DEBUG = window.DEBUG, $ = window.$, tippy = window.tippy, alert = window.ale
     });
 
     !gt && [(document.title = "NOT TRANSLATED")];
+    cb && cb();
     DEBUG && console.debug(Content);
   };
 }
+
+//less tracking
+{
+  var t = window._setupIW;
+  window._setupIW = function()  {
+    t();
+    console.log("infowindow was triggered");
+  };
+}
+window._csi = function(from, to, u)  {
+  console.log("nope", { from: from, to: to, u: u });
+};

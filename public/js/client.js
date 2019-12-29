@@ -10,30 +10,33 @@ document.addEventListener("DOMContentLoaded", function(event ) {
   setTimeout(function()  {
     DEBUG && console.log(("Requested language is:"), $.params.tl);
 
-    fetch($.params.u)
-      .then(function(res ) {return res.text()})
-      .then(function(t ) {
-        initRender(t);
+    var done = function()  {
+      var Content = window.CONTENT;
+      var gt = window.wasTranslated();
 
-        var Content = window.CONTENT;
-        var gt = window.wasTranslated();
+      Object.keys(Content).forEach(function(id ) {
+        var d = gt ? Content[id].translated : Content[id].original; //data
+        var el = $(("#" + id));
+        DEBUG && console.debug((("Filling el #" + id) + ":"), el);
 
-        Object.keys(Content).forEach(function(id ) {
-          var d = gt ? Content[id].translated : Content[id].original; //data
-          var el = $(("#" + id));
-          DEBUG && console.debug((("Filling el #" + id) + ":"), el);
-
-          d.text && el.text(d.text.c);
-          d.title && el.attr("title", d.title.c); //title
-          d.alt && el.attr("alt", d.alt.c); //alt tag  for img etc
-          d.placeholder && el.attr("placeholder", d.placeholder.c); //placeholder
-
-          //done
-          setTimeout(function()  {
-            $("html").attr("state", "loading-done");
-            DEBUG && console.debug("Translation done");
-          }, 99);
-        });
+        d.text && el.text(d.text.c);
+        d.title && el.attr("title", d.title.c); //title
+        d.alt && el.attr("alt", d.alt.c); //alt tag  for img etc
+        d.placeholder && el.attr("placeholder", d.placeholder.c); //placeholder
       });
+    };
+    //done
+    setTimeout(function()  {
+      $("html").attr("state", "loading-done");
+      DEBUG && console.debug("Translation done");
+    }, 99);
+
+    $.params.u
+      ? fetch($.params.u)
+          .then(function(res ) {return res.text()})
+          .then(function(t ) {
+            initRender(done);
+          })
+      : initRender(done);
   }, 999);
 });

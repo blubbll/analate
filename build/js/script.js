@@ -34,7 +34,7 @@ const { DEBUG, $, tippy, alert } = window;
     return $("#google-infowindow").length > 0;
   };
 
-  window.initRender = original => {
+  window.initRender = cb => {
     // console.log($("data#content>.notranslate").length);
 
     const gt = window.wasTranslated();
@@ -92,7 +92,7 @@ const { DEBUG, $, tippy, alert } = window;
         ];
 
         //vars original
-        const bon = `♦`;
+        const bon = `🃁🃏`;
         Object.keys(ELEMENT.original).forEach(key => {
           ELEMENT.original[`${$(prop).attr("name")}`].vars.forEach(_var => {
             //content
@@ -128,6 +128,19 @@ const { DEBUG, $, tippy, alert } = window;
     });
 
     !gt && [(document.title = "NOT TRANSLATED")];
+    cb && cb();
     DEBUG && console.debug(Content);
   };
 }
+
+//less tracking
+{
+  const t = window._setupIW;
+  window._setupIW = () => {
+    t();
+    console.log("infowindow was triggered");
+  };
+}
+window._csi = (from, to, u) => {
+  console.log("nope", { from, to, u });
+};
