@@ -27,25 +27,22 @@ const genHtml = input => {
   let html = "";
   Object.keys(input).forEach(id => {
     html += `<item data-id="${id}">`;
-    const content = input[id].content;
-    const vars = input[id].vars;
+    const content = input[id];
     Object.keys(content).forEach(prop => {
-      const c = content[prop]; //content
-      //normal prop
-      if (prop !== "vars") {
-        html += `<prop name="${prop}"><c>${c}</c></prop>`;
+      const c = content[prop].c; //content
+      const vars = content[prop].vars;
+
+      html += `<prop name="${prop}"><c>${c}</c>`;
+      //give vars
+      if (vars) {
+        html += `<div class="notranslate">`;
+        vars.forEach((val, i) => {
+          html += `<v>${val}</v>`;
+        });
+        html += `</div>`;
       }
+      html += `</prop>`;
     });
-    //give vars
-    if (vars) {
-      html += `<div class="notranslate">`;
-
-      vars.forEach((val, i) => {
-        html += `<v>${val}</v>`;
-      });
-
-      html += `</div>`;
-    }
   });
   return html;
 };
@@ -59,11 +56,8 @@ const genHtml = input => {
 
 const exData = genHtml({
   nav_home: {
-    content: {
-      text: "Homepage",
-      title: "This is a 🌿💮 test"
-    },
-    
+    text: { c: "Homepage" },
+    title: { c: "This is a 🌿💮 test", vars: ["cool"] }
   }
 });
 

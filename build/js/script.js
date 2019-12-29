@@ -53,40 +53,50 @@ const { DEBUG, $, tippy, alert } = window;
     let Content = (window.CONTENT = {});
 
     $.each($("data#content>item"), (i, item) => {
-      const ELEMENT = { original: {}, translated: {}, vars: [] };
+      const ELEMENT = { original: {}, translated: {} };
       const id = $(item).attr("data-id");
 
-      $.each($(item).find("prop"), (i, el) => {
-        $.each($(el).find("v"), (i, Var) => {
-          ELEMENT.vars.push($(Var).text());
-        });
+      $.each($(item).find("prop"), (i, prop) => {
+        
+        const VARS = [];
+        
+        //init
+        ELEMENT.original[`${$(prop).attr("name")}`] = { c: "" };
+        ELEMENT.translated[`${$(prop).attr("name")}`] = { c: "" };
 
+        //set original
         [
-          (ELEMENT.original[`${$(el).attr("name")}`] = sanitize(
-            gt ? $(el).find(".google-src-text") : $(el).find("c")
+          (ELEMENT.original[`${$(prop).attr("name")}`].c = sanitize(
+            gt ? $(prop).find(".google-src-text") : $(prop).find("c")
           ))
         ];
 
+        //set translated
         gt && [
-          (ELEMENT.translated[`${$(el).attr("name")}`] = sanitize(
-            $(el).find(".notranslate")
+          (ELEMENT.translated[`${$(prop).attr("name")}`].c = sanitize(
+            $(prop).find(".notranslate")
           ))
         ];
+
+        //push vars
+        $.each($(prop).find("v"), (i, v) => {
+          VARS.push($(v).text());
+        });
 
         //vars
         const bon = `🌿💮`;
         Object.keys(ELEMENT.original).forEach(key => {
-          ELEMENT.vars.forEach(_var => {
+          ELEMENT.original[`${$(prop).attr("name")}`].vars.forEach(_var => {
             //content
-            const c = ELEMENT.original[key];
+            const c = ELEMENT.original[key].c;
 
             //if text includes variable
             if (c.includes(bon)) {
               //replace in original
-              ELEMENT.original[key] = c.replace(bon, _var);
+              ELEMENT.original[key].c = c.replace(bon, _var);
               //replace in translated
               gt && [
-                (ELEMENT.translated[key] = ELEMENT.translated[key].replace(
+                (ELEMENT.translated[key].c = ELEMENT.translated[key].c.replace(
                   bon,
                   _var
                 ))
@@ -102,6 +112,5 @@ const { DEBUG, $, tippy, alert } = window;
 
     !gt && [(document.title = "NOT TRANSLATED")];
     DEBUG && console.debug(Content);
-
   };
 }
