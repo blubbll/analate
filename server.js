@@ -22,6 +22,14 @@ app.get("*", (req, res, next) => {
   //res.redirect("https://example.com");
 });
 
+const getTest = () =>{
+  return 
+}
+
+
+
+app.get("")
+
 //TRANSPILE es6 js to es5
 const es6tr = require("es6-transpiler");
 const transpile = file => {

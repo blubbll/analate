@@ -22,7 +22,6 @@ var DEBUG = window.DEBUG, $ = window.$, tippy = window.tippy, alert = window.ale
 {
   window.DEBUG = 1;
 }
-
 {
   var withNormalizedKeys = function(o ) {
     return Object.entries(o)
@@ -47,7 +46,7 @@ var DEBUG = window.DEBUG, $ = window.$, tippy = window.tippy, alert = window.ale
     return $("#google-infowindow").length > 0;
   };
 
-  window.initRender = function(cb ) {
+  window.initRender = function(original ) {
     // console.log($("data#content>.notranslate").length);
 
     var gt = window.wasTranslated();
@@ -76,7 +75,7 @@ var DEBUG = window.DEBUG, $ = window.$, tippy = window.tippy, alert = window.ale
         ];
 
         //vars
-        var bon = "⚛";
+        var bon = ("🌿💮");
         Object.keys(ELEMENT.original).forEach(function(key ) {
           ELEMENT.vars.forEach(function(_var ) {
             var t = ELEMENT.original[key];
@@ -104,6 +103,5 @@ var DEBUG = window.DEBUG, $ = window.$, tippy = window.tippy, alert = window.ale
     !gt && [(document.title = "NOT TRANSLATED")];
     DEBUG && console.debug(Content);
 
-    cb && cb();
   };
 }

@@ -21,7 +21,6 @@ const { DEBUG, $, tippy, alert } = window;
 {
   window.DEBUG = 1;
 }
-
 {
   const withNormalizedKeys = o => {
     return Object.entries(o)
@@ -46,7 +45,7 @@ const { DEBUG, $, tippy, alert } = window;
     return $("#google-infowindow").length > 0;
   };
 
-  window.initRender = cb => {
+  window.initRender = original => {
     // console.log($("data#content>.notranslate").length);
 
     const gt = window.wasTranslated();
@@ -75,7 +74,7 @@ const { DEBUG, $, tippy, alert } = window;
         ];
 
         //vars
-        const bon = "⚛";
+        const bon = `🌿💮`;
         Object.keys(ELEMENT.original).forEach(key => {
           ELEMENT.vars.forEach(_var => {
             const t = ELEMENT.original[key];
@@ -103,6 +102,5 @@ const { DEBUG, $, tippy, alert } = window;
     !gt && [(document.title = "NOT TRANSLATED")];
     DEBUG && console.debug(Content);
 
-    cb && cb();
   };
 }
