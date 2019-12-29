@@ -23,20 +23,9 @@ var DEBUG = window.DEBUG, $ = window.$, tippy = window.tippy, alert = window.ale
   window.DEBUG = 1;
 }
 {
-  var withNormalizedKeys = function(o ) {
-    return Object.entries(o)
-      .map(function(value)  {var key = value[0], value = value[1];return [key.replace(/\s+/g, ""), value]})
-      .reduce(function(result, value)  {var normalizedKey = value[0], value = value[1];
-        result[normalizedKey] =
-          value && typeof value === "object"
-            ? withNormalizedKeys(value)
-            : value;
-        return result;
-      }, {});
-  };
-
   var sanitize = function(input, cut)  {
     var output = (input.text() || "").trim().replace(/(\r\n|\n|\r)/gm, ""); //uwu linebreaks are bwad
+
     !cut && input.remove();
     //console.log(output);
     return output;
@@ -58,12 +47,19 @@ var DEBUG = window.DEBUG, $ = window.$, tippy = window.tippy, alert = window.ale
       var id = $(item).attr("data-id");
 
       $.each($(item).find("prop"), function(i, prop)  {
-        
-        var VARS = [];
-        
+        //stitch original START
+        var stitchO = "";
+        $.each($(prop).find(".google-src-text"), function(i, tex)  {
+          stitchO += (" " + ($(tex).text()));
+        });
+        $(prop)
+          .find(".google-src-text")
+          .text(stitchO.slice(1));
+        //stitch original END
+
         //init
-        ELEMENT.original[("" + ($(prop).attr("name")))] = { c: "" };
-        ELEMENT.translated[("" + ($(prop).attr("name")))] = { c: "" };
+        ELEMENT.original[("" + ($(prop).attr("name")))] = { c: "", vars: [] };
+        ELEMENT.translated[("" + ($(prop).attr("name")))] = { c: "", vars: [] };
 
         //set original
         [
@@ -72,6 +68,23 @@ var DEBUG = window.DEBUG, $ = window.$, tippy = window.tippy, alert = window.ale
           ))
         ];
 
+        //push vars
+        $.each($(prop).find("v"), function(i, v)  {
+          ELEMENT.original[("" + ($(prop).attr("name")))].vars.push($(v).text());
+          ELEMENT.translated[("" + ($(prop).attr("name")))].vars.push($(v).text());
+        });
+
+        //stitch translated START
+        var stitchT = "";
+        $.each($(prop).find(".notranslate"), function(i, tex)  {
+          //skip actual vars
+          !$(tex).hasClass("v") && [(stitchT += (" " + ($(tex).text())))];
+        });
+        $(prop)
+          .find(".notranslate")
+          .text(stitchT.slice(1));
+        //stitch translated END
+
         //set translated
         gt && [
           (ELEMENT.translated[("" + ($(prop).attr("name")))].c = sanitize(
@@ -79,13 +92,8 @@ var DEBUG = window.DEBUG, $ = window.$, tippy = window.tippy, alert = window.ale
           ))
         ];
 
-        //push vars
-        $.each($(prop).find("v"), function(i, v)  {
-          VARS.push($(v).text());
-        });
-
-        //vars
-        var bon = ("🌿💮");
+        //vars original
+        var bon = ("♦");
         Object.keys(ELEMENT.original).forEach(function(key ) {
           ELEMENT.original[("" + ($(prop).attr("name")))].vars.forEach(function(_var ) {
             //content
@@ -95,16 +103,25 @@ var DEBUG = window.DEBUG, $ = window.$, tippy = window.tippy, alert = window.ale
             if (c.includes(bon)) {
               //replace in original
               ELEMENT.original[key].c = c.replace(bon, _var);
-              //replace in translated
-              gt && [
-                (ELEMENT.translated[key].c = ELEMENT.translated[key].c.replace(
-                  bon,
-                  _var
-                ))
-              ];
             }
           });
         });
+
+        //vars translated
+
+        gt &&
+          Object.keys(ELEMENT.translated).forEach(function(key ) {
+            ELEMENT.translated[("" + ($(prop).attr("name")))].vars.forEach(function(_var ) {
+              //content
+              var c = ELEMENT.translated[key].c;
+
+              //if text includes variable
+              if (c.includes(bon)) {
+                //replace in translated
+                ELEMENT.translated[key].c = c.replace(bon, _var);
+              }
+            });
+          });
       });
 
       //put element into correct id

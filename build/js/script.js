@@ -22,20 +22,9 @@ const { DEBUG, $, tippy, alert } = window;
   window.DEBUG = 1;
 }
 {
-  const withNormalizedKeys = o => {
-    return Object.entries(o)
-      .map(([key, value]) => [key.replace(/\s+/g, ""), value])
-      .reduce((result, [normalizedKey, value]) => {
-        result[normalizedKey] =
-          value && typeof value === "object"
-            ? withNormalizedKeys(value)
-            : value;
-        return result;
-      }, {});
-  };
-
   const sanitize = (input, cut) => {
     const output = (input.text() || "").trim().replace(/(\r\n|\n|\r)/gm, ""); //uwu linebreaks are bwad
+
     !cut && input.remove();
     //console.log(output);
     return output;
@@ -57,12 +46,19 @@ const { DEBUG, $, tippy, alert } = window;
       const id = $(item).attr("data-id");
 
       $.each($(item).find("prop"), (i, prop) => {
-        
-        const VARS = [];
-        
+        //stitch original START
+        let stitchO = "";
+        $.each($(prop).find(".google-src-text"), (i, tex) => {
+          stitchO += ` ${$(tex).text()}`;
+        });
+        $(prop)
+          .find(".google-src-text")
+          .text(stitchO.slice(1));
+        //stitch original END
+
         //init
-        ELEMENT.original[`${$(prop).attr("name")}`] = { c: "" };
-        ELEMENT.translated[`${$(prop).attr("name")}`] = { c: "" };
+        ELEMENT.original[`${$(prop).attr("name")}`] = { c: "", vars: [] };
+        ELEMENT.translated[`${$(prop).attr("name")}`] = { c: "", vars: [] };
 
         //set original
         [
@@ -71,6 +67,23 @@ const { DEBUG, $, tippy, alert } = window;
           ))
         ];
 
+        //push vars
+        $.each($(prop).find("v"), (i, v) => {
+          ELEMENT.original[`${$(prop).attr("name")}`].vars.push($(v).text());
+          ELEMENT.translated[`${$(prop).attr("name")}`].vars.push($(v).text());
+        });
+
+        //stitch translated START
+        let stitchT = "";
+        $.each($(prop).find(".notranslate"), (i, tex) => {
+          //skip actual vars
+          !$(tex).hasClass("v") && [(stitchT += ` ${$(tex).text()}`)];
+        });
+        $(prop)
+          .find(".notranslate")
+          .text(stitchT.slice(1));
+        //stitch translated END
+
         //set translated
         gt && [
           (ELEMENT.translated[`${$(prop).attr("name")}`].c = sanitize(
@@ -78,13 +91,8 @@ const { DEBUG, $, tippy, alert } = window;
           ))
         ];
 
-        //push vars
-        $.each($(prop).find("v"), (i, v) => {
-          VARS.push($(v).text());
-        });
-
-        //vars
-        const bon = `🌿💮`;
+        //vars original
+        const bon = `♦`;
         Object.keys(ELEMENT.original).forEach(key => {
           ELEMENT.original[`${$(prop).attr("name")}`].vars.forEach(_var => {
             //content
@@ -94,16 +102,25 @@ const { DEBUG, $, tippy, alert } = window;
             if (c.includes(bon)) {
               //replace in original
               ELEMENT.original[key].c = c.replace(bon, _var);
-              //replace in translated
-              gt && [
-                (ELEMENT.translated[key].c = ELEMENT.translated[key].c.replace(
-                  bon,
-                  _var
-                ))
-              ];
             }
           });
         });
+
+        //vars translated
+
+        gt &&
+          Object.keys(ELEMENT.translated).forEach(key => {
+            ELEMENT.translated[`${$(prop).attr("name")}`].vars.forEach(_var => {
+              //content
+              const c = ELEMENT.translated[key].c;
+
+              //if text includes variable
+              if (c.includes(bon)) {
+                //replace in translated
+                ELEMENT.translated[key].c = c.replace(bon, _var);
+              }
+            });
+          });
       });
 
       //put element into correct id

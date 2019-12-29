@@ -1,7 +1,7 @@
 const { fetch, alert, DEBUG, $, needRender, initRender, tippy } = window;
 
 //localized "Translating..."-msg
-$("placeholder.loading").text($("verb-0").attr("title"));
+$("placeholder").text($("verb-0").attr("title"));
 
 document.addEventListener("DOMContentLoaded", event => {
   setTimeout(console.clear, 499);
@@ -22,15 +22,15 @@ document.addEventListener("DOMContentLoaded", event => {
           const el = $(`#${id}`);
           DEBUG && console.debug(`Filling el #${id}:`, el);
 
-          el.text(d.text);
-          el.attr("title", d.title); //title
-          el.attr("alt", d.alt); //alt tag  for img etc
-          el.attr("placeholder", d.placeholder); //placeholder
+          d.text && el.text(d.text.c);
+          d.title && el.attr("title", d.title.c); //title
+          d.alt && el.attr("alt", d.alt.c); //alt tag  for img etc
+          d.placeholder && el.attr("placeholder", d.placeholder.c); //placeholder
 
           //done
           setTimeout(() => {
-            $("#content-wrapper placeholder").removeClass("loading");
-            $("gtp .loader").css({ display: "none" });
+            $("html").attr("state", "loading-done");
+            DEBUG && console.debug("Translation done");
           }, 99);
         });
       });

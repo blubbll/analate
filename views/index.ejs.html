@@ -8,7 +8,7 @@
 <!-- hbs(handlebars): http://handlebarsjs.com/ -->
 
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" state="loading">
   <head>
     <title>Welcome to Glitch!</title>
     <meta name="description" content="A cool thing made with Glitch" />
@@ -34,7 +34,6 @@
   <body>
     <gtp>
       <verb-0 title="Translating..."></verb-0>
-      <div class="wrap go">
         <div class="loader bar">
           <!-- google now -->
           <div class="blue"></div>
@@ -42,15 +41,15 @@
           <div class="green"></div>
           <div class="red"></div>
         </div>
-      </div>
 
       <data id="content" style="display: none;">
         <%-data%>
       </data>
     </gtp>
 
+    <placeholder></placeholder>
+
     <div id="content-wrapper">
-      <placeholder class="loading"></placeholder>
       <a href="./" id="templateLink" style="display:none;"></a>
       <div class="cover-container d-flex h-100 p-3 mx-auto flex-column">
         <header class="masthead mb-auto">
@@ -84,6 +83,11 @@
             </nav>
           </div>
         </header>
+
+        <section>
+          <img id="img_cat" src="http://placekitten.com/700/300"/>
+          <p id="text_cat"></p>
+        </section>
 
         <main role="main" class="inner cover">
           <h1 class="cover-heading" id="1"></h1>

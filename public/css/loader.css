@@ -1,49 +1,48 @@
-gtp {
+html[state="loading-done"] placeholder {
+  display: none; }
+
+html[state="loading"] gtp {
   /* BAR */ }
-  gtp * {
+  html[state="loading"] gtp * {
     padding: 0;
     margin: 0;
     box-sizing: inherit; }
-  gtp .red {
+  html[state="loading"] gtp .red {
     background-color: #DB4437; }
-  gtp .yellow {
+  html[state="loading"] gtp .yellow {
     background-color: #F4B400; }
-  gtp .green {
+  html[state="loading"] gtp .green {
     background-color: #0F9D58 #0F9D58; }
-  gtp .blue {
+  html[state="loading"] gtp .blue {
     background-color: #4285F4; }
-  gtp .wrap {
-    margin: 0 auto;
-    line-height: 6rem;
-    text-align: center; }
-  gtp .loader {
+  html[state="loading"] gtp .loader {
     position: absolute;
     margin: 0 auto 3rem auto;
     overflow: hidden; }
-  gtp .loader > div {
+  html[state="loading"] gtp .loader > div {
     position: absolute;
     top: 0;
     left: 0;
     height: 100%;
     width: 100%; }
-  gtp .bar {
+  html[state="loading"] gtp .bar {
     width: 100%;
     height: 100%;
     position: fixed;
     top: 0;
     left: 0;
     opacity: 0.1; }
-  gtp .go .loader.bar > div {
+  html[state="loading"] gtp .loader.bar > div {
     animation: loading-bar 2s infinite backwards ease-out; }
-  gtp .bar > div {
+  html[state="loading"] gtp .bar > div {
     transform: scaleX(1); }
-  gtp .loader.bar div:nth-child(1) {
+  html[state="loading"] gtp .loader.bar div:nth-child(1) {
     animation-delay: -1.5s; }
-  gtp .loader.bar div:nth-child(2) {
+  html[state="loading"] gtp .loader.bar div:nth-child(2) {
     animation-delay: -1s; }
-  gtp .loader.bar div:nth-child(3) {
+  html[state="loading"] gtp .loader.bar div:nth-child(3) {
     animation-delay: -0.5s; }
-  gtp .loader.bar div:nth-child(4) {
+  html[state="loading"] gtp .loader.bar div:nth-child(4) {
     animation-delay: 0s; }
 
 @keyframes loading-bar {
@@ -62,31 +61,29 @@ gtp {
     transform: scaleX(1);
     z-index: 0; } }
 
-#content-wrapper {
+html[state="loading"] #content-wrapper {
+  display: none; }
+
+html[state="loading"] placeholder {
+  /*border: 1px solid black;*/
+  justify-content: center;
+  align-items: center;
+  font-size: 8vw;
   display: flex;
-  width: 100%;
-  height: 100%; }
-  #content-wrapper > placeholder {
-    display: none;
-    justify-content: center;
-    align-items: center;
-    font-size: 8vw; }
-    #content-wrapper > placeholder.loading {
-      display: flex;
-      margin: 1px;
-      position: absolute;
-      height: calc(100% - 43px);
-      width: calc(100% - 32px);
-      margin: 1px 0;
-      position: fixed;
-      background-color: #eee;
-      animation-duration: 1.25s;
-      animation-fill-mode: forwards;
-      animation-iteration-count: infinite;
-      animation-name: placeHolderShimmer;
-      animation-timing-function: linear;
-      background: darkgray;
-      background: linear-gradient(to right, #eeeeee 10%, #dddddd 18%, #eeeeee 33%); }
+  margin: 1px;
+  position: absolute;
+  height: calc(100% - 43px);
+  width: calc(100% - 32px);
+  margin: 1px 0;
+  position: fixed;
+  background-color: #eee;
+  animation-duration: 1.25s;
+  animation-fill-mode: forwards;
+  animation-iteration-count: infinite;
+  animation-name: placeHolderShimmer;
+  animation-timing-function: linear;
+  background: darkgray;
+  background: linear-gradient(to right, #eeeeee 10%, #dddddd 18%, #eeeeee 33%); }
 
 @keyframes placeHolderShimmer {
   0% {

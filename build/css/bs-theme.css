@@ -15,7 +15,11 @@ a:hover {
 
 html,
 body {
-  height: 100%;
+  height: auto;
+}
+
+html.loading{
+  
 }
 
 html {
