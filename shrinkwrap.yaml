@@ -1,5 +1,6 @@
 dependencies:
   cors: 2.8.5
+  ejs: 3.0.1
   es6-transpiler: 0.7.18
   express: 4.17.1
   node-sass: 4.13.0
@@ -335,6 +336,13 @@ packages:
     dev: false
     resolution:
       integrity: sha1-WQxhFWsK4vTwJVcyoViyZrxWsh0=
+  /ejs/3.0.1:
+    dev: false
+    engines:
+      node: '>=0.10.0'
+    requiresBuild: true
+    resolution:
+      integrity: sha512-cuIMtJwxvzumSAkqaaoGY/L6Fc/t6YvoP9/VIaK0V/CyqKLEQ8sqODmYfy/cjXEdZ9+OOL8TecbJu+1RsofGDw==
   /encodeurl/1.0.2:
     dev: false
     engines:
@@ -1671,6 +1679,7 @@ shrinkwrapMinorVersion: 9
 shrinkwrapVersion: 3
 specifiers:
   cors: ^2.8.5
+  ejs: ^3.0.1
   es6-transpiler: ^0.7.18
   express: ^4.17.1
   node-sass: ^4.13.0

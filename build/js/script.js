@@ -77,12 +77,13 @@ const { DEBUG, $, tippy, alert } = window;
         const bon = `🌿💮`;
         Object.keys(ELEMENT.original).forEach(key => {
           ELEMENT.vars.forEach(_var => {
-            const t = ELEMENT.original[key];
+            //content
+            const c = ELEMENT.original[key];
 
             //if text includes variable
-            if (t.includes(bon)) {
+            if (c.includes(bon)) {
               //replace in original
-              ELEMENT.original[key] = t.replace(bon, _var);
+              ELEMENT.original[key] = c.replace(bon, _var);
               //replace in translated
               gt && [
                 (ELEMENT.translated[key] = ELEMENT.translated[key].replace(

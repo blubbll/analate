@@ -6,7 +6,8 @@ const express = require("express"),
   app = express(),
   cors = require("cors"),
   sass = require("node-sass"),
-  fs = require("fs");
+  fs = require("fs"),
+  ejs = require("ejs");
 
 app.use(cors());
 
@@ -22,13 +23,55 @@ app.get("*", (req, res, next) => {
   //res.redirect("https://example.com");
 });
 
-const getTest = () =>{
-  return 
-}
+const genHtml = input => {
+  let html = "";
+  Object.keys(input).forEach(id => {
+    html += `<item data-id="${id}">`;
+    const content = input[id].content;
+    const vars = input[id].vars;
+    Object.keys(content).forEach(prop => {
+      const c = content[prop]; //content
+      //normal prop
+      if (prop !== "vars") {
+        html += `<prop name="${prop}"><c>${c}</c></prop>`;
+      }
+    });
+    //give vars
+    if (vars) {
+      html += `<div class="notranslate">`;
 
+      vars.forEach((val, i) => {
+        html += `<v>${val}</v>`;
+      });
 
+      html += `</div>`;
+    }
+  });
+  return html;
+};
 
-app.get("")
+/*<item data-id="nav_home">
+  <prop name="text"><t>Homepage</t></prop>
+  <div class="notranslate">
+    <v>cool</v>
+  </div>
+</item>*/
+
+const exData = ""
+
+app.get("/ex", (req, res) => {
+  res.send(
+    genHtml({
+      nav_home: {
+        content: {
+          text: "Homepage",
+          title: "This is a 🌿💮 test"
+        },
+        vars: ["cool"]
+      }
+    })
+  );
+});
 
 //TRANSPILE es6 js to es5
 const es6tr = require("es6-transpiler");
@@ -76,7 +119,10 @@ if (process.env.PROJECT_NAME) {
 
 // http://expressjs.com/en/starter/basic-routing.html
 app.get("/", (req, res) => {
-  res.sendFile(__dirname + "/views/index.html");
+  //res.sendFile(__dirname + "/views/index.html");
+  ejs.renderFile(filename, data, options, function(err, str) {
+    // str => Rendered HTML string
+  });
 });
 
 // http://expressjs.com/en/starter/basic-routing.html

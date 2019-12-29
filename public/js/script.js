@@ -78,12 +78,13 @@ var DEBUG = window.DEBUG, $ = window.$, tippy = window.tippy, alert = window.ale
         var bon = ("🌿💮");
         Object.keys(ELEMENT.original).forEach(function(key ) {
           ELEMENT.vars.forEach(function(_var ) {
-            var t = ELEMENT.original[key];
+            //content
+            var c = ELEMENT.original[key];
 
             //if text includes variable
-            if (t.includes(bon)) {
+            if (c.includes(bon)) {
               //replace in original
-              ELEMENT.original[key] = t.replace(bon, _var);
+              ELEMENT.original[key] = c.replace(bon, _var);
               //replace in translated
               gt && [
                 (ELEMENT.translated[key] = ELEMENT.translated[key].replace(
