@@ -93,7 +93,7 @@ var DEBUG = window.DEBUG, $ = window.$, tippy = window.tippy, alert = window.ale
         ];
 
         //vars original
-        var bon = ("🃁🃏");
+        var bon = ("♦");
         Object.keys(ELEMENT.original).forEach(function(key ) {
           ELEMENT.original[("" + ($(prop).attr("name")))].vars.forEach(function(_var ) {
             //content

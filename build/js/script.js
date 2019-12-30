@@ -92,7 +92,7 @@ const { DEBUG, $, tippy, alert } = window;
         ];
 
         //vars original
-        const bon = `🃁🃏`;
+        const bon = `♦`;
         Object.keys(ELEMENT.original).forEach(key => {
           ELEMENT.original[`${$(prop).attr("name")}`].vars.forEach(_var => {
             //content
