@@ -10,7 +10,11 @@
     "start": "node server.js"
   },
   "dependencies": {
-    "express": "^4.16.4"
+    "express": "^4.17.1",
+    "cors": "^2.8.5",
+    "node-sass": "^4.13.0",
+    "es6-transpiler": "^0.7.18",
+    "ejs": "^3.0.1"
   },
   "engines": {
     "node": "8.x"
