@@ -23,6 +23,7 @@ app.get("*", (req, res, next) => {
   //res.redirect("https://example.com");
 });
 
+const bon = `🍬`;
 const genHtml = input => {
   let html = "";
   Object.keys(input).forEach(id => {
@@ -32,22 +33,20 @@ const genHtml = input => {
       const c = content[prop].c; //content
       const vars = content[prop].vars;
 
-      html += `<prop name="${prop}"><c>${c}</c>`;
+      html += `<div name="${prop}" title="${c}" class="notranslate">`;
       //give vars
       if (vars) {
-        html += `<div class="v notranslate">`;
         vars.forEach((val, i) => {
           html += `<v>${val}</v>`;
         });
-        html += `</div>`;
       }
-      html += `</prop>`;
+      html += `</div>`;
     });
     html += `</item>`;
   });
   return html;
 };
-
+//never use the word THE before a variable...
 /*
 <item data-id="6">
   <prop name="text">
@@ -67,9 +66,8 @@ const genHtml = input => {
 </item>
 */
 
-const bon = `&diams;`;
 //never use - after a var or in front of a text, also never use two vars after each other
-const exData = genHtml({
+const exData = {
   1: {
     text: { c: "This is a heading" },
     title: {
@@ -88,7 +86,7 @@ const exData = genHtml({
     text: { c: "Sample p Element" }
   },
   5: {
-    text: { c: `Sample Link to download the ${bon}`, vars: ["Bootstrap"] }
+    text: { c: `Sample Link to download ${bon}`, vars: ["Bootstrap"] }
   },
   6: {
     text: { c: `The ${bon} profile of ${bon}`, vars: ["Twitter", "mdo"] },
@@ -105,7 +103,7 @@ const exData = genHtml({
     text: {
       c: `
 Lick butt run around the house at 4 in the morning and paw at your fat belly. Swipe at owner's legs chew on cable furrier and even more furrier hairball yet rub against owner because nose is wet cat not kitten around . Kitty pounce, trip, faceplant you didn't see that no you didn't definitely didn't lick, lick, lick, and preen away the embarrassment plan steps for world domination leave hair on owner's clothes russian blue. Weigh eight pounds but take up a full-size bed knock dish off table head butt cant eat out of my own dish. Playing with balls of wool jump launch to pounce upon little yarn mouse, bare fangs at toy run hide in litter box until treats are fed and that box? i can fit in that box yet chase after silly colored fish toys around the house, but make plans to dominate world and then take a nap meow and walk away sleep all day whilst slave is at work, play all night whilst slave is sleeping. Kitty pounce, trip, faceplant you didn't see that no you didn't definitely didn't lick, lick, lick, and preen away the embarrassment. I is not fat, i is fluffy dont wait for the storm to pass, dance in the rain. Eat a plant, kill a hand fight own tail and cat slap dog in face cats are the world and make plans to dominate world and then take a nap for no, you can't close the door, i haven't decided whether or not i wanna go out. Lick the other cats hunt by meowing loudly at 5am next to human slave food dispenser. Ask to go outside and ask to come inside and ask to go outside and ask to come inside i shall purr myself to sleep so stretch put butt in owner's face stare out cat door then go back inside meow meow we are 3 small kittens sleeping most of our time, we are around 15 weeks old i think, i don’t know i can’t count. Stuff and things more napping, more napping all the napping is exhausting for scratch the furniture meow in empty rooms. I hate cucumber pls dont throw it at me. Sniff all the things trip on catnip for lick butt and make a weird face catty ipsum, for i shredded your linens for you yet spit up on light gray carpet instead of adjacent linoleum. Adventure always i want to go outside let me go outside nevermind inside is better going to catch the red dot today going to catch the red dot today leave fur on owners clothes but catch mouse and gave it as a present or hiiiiiiiiii feed me now purr purr purr until owner pets why owner not pet me hiss scratch meow. Drool murf pratt ungow ungow. Howl on top of tall thing good now the other hand, too. Meow all night having their mate disturbing sleeping humans destroy house in 5 seconds mice i hate cucumber pls dont throw it at me. Spread kitty litter all over house cough furball into food bowl then scratch owner for a new one mewl for food at 4am. Spread kitty litter all over house sleep in the bathroom sink instantly break out into full speed gallop across the house for no reason but caticus cuteicus or chase dog then run away lick master's hand at first then bite because im moody.
-
+${fs.readFileSync(__dirname + "/test.html")}
 `
     }
   },
@@ -115,9 +113,11 @@ Lick butt run around the house at 4 in the morning and paw at your fat belly. Sw
   },
   nav_test: {
     text: { c: `Test ${bon}`, vars: [":3"] },
-    title: { c: "This is a test-navigation" }
+    title: { c: "This is a Navigation-test" }
   }
-});
+};
+
+
 
 //TRANSPILE es6 js to es5
 const es6tr = require("es6-transpiler");
@@ -168,11 +168,15 @@ app.get("/", (req, res) => {
   //res.sendFile(__dirname + "/views/index.html");
   ejs.renderFile(
     `${__dirname}/views/index.ejs.html`,
-    { data: exData },
+    { data: genHtml(exData) },
     (err, str) => {
       err ? console.warn(err) : res.send(str);
     }
   );
+});
+
+app.get("/ex", (req, res) => {
+  res.json(exData)
 });
 
 // http://expressjs.com/en/starter/basic-routing.html

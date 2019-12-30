@@ -23,19 +23,19 @@ document.addEventListener("DOMContentLoaded", event => {
         d.alt && el.attr("alt", d.alt.c); //alt tag  for img etc
         d.placeholder && el.attr("placeholder", d.placeholder.c); //placeholder
       });
-    };
-    //done
-    setTimeout(() => {
-      $("html").attr("state", "loading-done");
-      DEBUG && console.debug("Translation done");
-    }, 99);
 
-    $.params.u
-      ? fetch($.params.u)
-          .then(res => res.text())
-          .then(t => {
-            initRender(done);
-          })
-      : initRender(done);
+      //done
+      setTimeout(() => {
+        $("html").attr("state", "loading-done");
+        DEBUG && console.debug("Translation done");
+      }, 99);
+    };
+
+    const u = ($.params.u || location.href).split("?")[0];
+    fetch(`${u}/ex`)
+      .then(res => res.text())
+      .then(t => {
+        initRender(t, done);
+      });
   }, 999);
 });

@@ -24,19 +24,19 @@ document.addEventListener("DOMContentLoaded", function(event ) {
         d.alt && el.attr("alt", d.alt.c); //alt tag  for img etc
         d.placeholder && el.attr("placeholder", d.placeholder.c); //placeholder
       });
-    };
-    //done
-    setTimeout(function()  {
-      $("html").attr("state", "loading-done");
-      DEBUG && console.debug("Translation done");
-    }, 99);
 
-    $.params.u
-      ? fetch($.params.u)
-          .then(function(res ) {return res.text()})
-          .then(function(t ) {
-            initRender(done);
-          })
-      : initRender(done);
+      //done
+      setTimeout(function()  {
+        $("html").attr("state", "loading-done");
+        DEBUG && console.debug("Translation done");
+      }, 99);
+    };
+
+    var u = ($.params.u || location.href).split("?")[0];
+    fetch((("" + u) + "/ex"))
+      .then(function(res ) {return res.text()})
+      .then(function(t ) {
+        initRender(t, done);
+      });
   }, 999);
 });

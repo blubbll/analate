@@ -24,9 +24,7 @@ var DEBUG = window.DEBUG, $ = window.$, tippy = window.tippy, alert = window.ale
 }
 {
   var sanitize = function(input, cut)  {
-    var output = (input.text() || "").trim().replace(/(\r\n|\n|\r)/gm, ""); //uwu linebreaks are bwad
-
-    !cut && input.remove();
+    var output = (input || "").trim().replace(/(\r\n|\n|\r)/gm, ""); //uwu linebreaks are bwad
     //console.log(output);
     return output;
   };
@@ -35,80 +33,35 @@ var DEBUG = window.DEBUG, $ = window.$, tippy = window.tippy, alert = window.ale
     return $("#google-infowindow").length > 0;
   };
 
-  window.initRender = function(cb ) {
+  window.initRender = function(original, cb)  {
     // console.log($("data#content>.notranslate").length);
 
     var gt = window.wasTranslated();
 
     var Content = (window.CONTENT = {});
 
+    var ODATA = JSON.parse(original);
     $.each($("data#content>item"), function(i, item)  {
-      var ELEMENT = { original: {}, translated: {} };
       var id = $(item).attr("data-id");
+      var ELEMENT = { original: ODATA[id], translated: {} };
 
-      $.each($(item).find("prop"), function(i, prop)  {
-        //stitch original START
-        var stitchO = "";
-        $.each($(prop).find(".google-src-text"), function(i, tex)  {
-          stitchO += (" " + ($(tex).text()));
-        });
-        $(prop)
-          .find(".google-src-text")
-          .text(stitchO.slice(1));
-        //stitch original END
-
+      $.each($(item).find("div.notranslate"), function(i, prop)  {
         //init
-        ELEMENT.original[("" + ($(prop).attr("name")))] = { c: "", vars: [] };
         ELEMENT.translated[("" + ($(prop).attr("name")))] = { c: "", vars: [] };
-
-        //set original
-        [
-          (ELEMENT.original[("" + ($(prop).attr("name")))].c = sanitize(
-            gt ? $(prop).find(".google-src-text") : $(prop).find("c")
-          ))
-        ];
 
         //push vars
         $.each($(prop).find("v"), function(i, v)  {
-          ELEMENT.original[("" + ($(prop).attr("name")))].vars.push($(v).text());
           ELEMENT.translated[("" + ($(prop).attr("name")))].vars.push($(v).text());
         });
-
-        //stitch translated START
-        var stitchT = "";
-        $.each($(prop).find(".notranslate"), function(i, tex)  {
-          //skip actual vars
-          !$(tex).hasClass("v") && [(stitchT += (" " + ($(tex).text())))];
-        });
-        $(prop)
-          .find(".notranslate")
-          .text(stitchT.slice(1));
-        //stitch translated END
 
         //set translated
         gt && [
           (ELEMENT.translated[("" + ($(prop).attr("name")))].c = sanitize(
-            $(prop).find(".notranslate")
+            $(prop).attr("title")
           ))
         ];
 
-        //vars original
-        var bon = ("♦");
-        Object.keys(ELEMENT.original).forEach(function(key ) {
-          ELEMENT.original[("" + ($(prop).attr("name")))].vars.forEach(function(_var ) {
-            //content
-            var c = ELEMENT.original[key].c;
-
-            //if text includes variable
-            if (c.includes(bon)) {
-              //replace in original
-              ELEMENT.original[key].c = c.replace(bon, _var);
-            }
-          });
-        });
-
-        //vars translated
-
+        var bon = ("🍬");
         gt &&
           Object.keys(ELEMENT.translated).forEach(function(key ) {
             ELEMENT.translated[("" + ($(prop).attr("name")))].vars.forEach(function(_var ) {
