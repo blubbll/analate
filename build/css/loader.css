@@ -7,7 +7,7 @@ html[state="loading-done-m"] {
 
 html[state="loading-held-m"] {
   & svg {
-    top: 100px!important;
+    top: 100px !important;
     left: 22px !important;
   }
 }
@@ -15,7 +15,7 @@ html[state="loading-held-m"] {
 html[state="loading-held"],
 html[state="loading-held-m"] {
   & svg {
-    top: -15px;
+    top: 0;
     left: 245px;
     position: fixed;
     animation-name: angry-animation;
@@ -25,6 +25,8 @@ html[state="loading-held-m"] {
     animation-iteration-count: infinite;
     animation-direction: normal;
   }
+
+  /* anim from https://angrytools.com/css/animation/*/
 
   @keyframes angry-animation {
     0% {

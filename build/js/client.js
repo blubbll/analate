@@ -32,7 +32,7 @@ document.addEventListener("DOMContentLoaded", event => {
         setTimeout(() => {
           $("html").attr("state", "loading-done");
 
-          window.top !== window.parent
+          window !== window.top
             ? $("html").attr("state", "loading-done") //framed
             : $("html").attr("state", "loading-done-m"); //mframed
 
@@ -55,7 +55,7 @@ document.addEventListener("DOMContentLoaded", event => {
             <i>${oLanguage}</i>
         `);
 
-      window.top !== window.parent
+      window !== window.top
         ? $("html").attr("state", "loading-held") //framed
         : $("html").attr("state", "loading-held-m"); //mframed
     }

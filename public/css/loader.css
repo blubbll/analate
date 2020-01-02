@@ -8,10 +8,11 @@ html[state="loading-held-m"] svg {
 
 html[state="loading-held"],
 html[state="loading-held-m"] {
+  /* anim from https://angrytools.com/css/animation/*/
   background: rgba(255, 0, 0, 0.1); }
   html[state="loading-held"] svg,
   html[state="loading-held-m"] svg {
-    top: -15px;
+    top: 0;
     left: 245px;
     position: fixed;
     animation-name: angry-animation;
