@@ -29,14 +29,11 @@ const { DEBUG, $, tippy, alert } = window;
   };
 
   window.wasTranslated = () => {
-    return $("#google-infowindow").length > 0;
+    return $.params.rurl.startsWith("translate.google") > 0;
   };
 
   window.initRender = (original, cb) => {
-    // console.log($("data#content>.notranslate").length);
-
     const gt = window.wasTranslated();
-
     let Content = (window.CONTENT = {});
 
     const ODATA = JSON.parse(original);

@@ -30,14 +30,11 @@ var DEBUG = window.DEBUG, $ = window.$, tippy = window.tippy, alert = window.ale
   };
 
   window.wasTranslated = function()  {
-    return $("#google-infowindow").length > 0;
+    return $.params.rurl.startsWith("translate.google") > 0;
   };
 
   window.initRender = function(original, cb)  {
-    // console.log($("data#content>.notranslate").length);
-
     var gt = window.wasTranslated();
-
     var Content = (window.CONTENT = {});
 
     var ODATA = JSON.parse(original);

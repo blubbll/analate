@@ -3,7 +3,20 @@ html[state="loading-done"] {
     display: none;
   }
 }
-html[state="loading"] {
+
+html[state="loading-held"] {
+  background: red;
+  & placeholder {
+    font-size: 4vw !important;
+    background: transparent !important;
+  }
+  & gtp {
+    display: none !important;
+  }
+}
+
+html[state="loading"],
+html[state="loading-held"] {
   gtp {
     * {
       padding: 0;
@@ -96,13 +109,13 @@ html[state="loading"] {
     display: none;
   }
   & placeholder {
+    text-align: center;
+    flex-direction: column;
     /*border: 1px solid black;*/
     justify-content: center;
     align-items: center;
     font-size: 8vw;
     display: flex;
-    margin: 1px;
-    position: absolute;
     height: calc(100% - 43px);
     width: calc(100% - 32px);
     margin: 1px 0;

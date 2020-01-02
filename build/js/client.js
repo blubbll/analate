@@ -9,33 +9,41 @@ document.addEventListener("DOMContentLoaded", event => {
   setTimeout(() => {
     DEBUG && console.log(`Requested language is:`, $.params.tl);
 
-    const done = () => {
-      let Content = window.CONTENT;
-      const gt = window.wasTranslated();
+    if ($.params.sl === "auto") {
+      const done = () => {
+        let Content = window.CONTENT;
+        const gt = window.wasTranslated();
 
-      Object.keys(Content).forEach(id => {
-        const d = gt ? Content[id].translated : Content[id].original; //data
-        const el = $(`#${id}`);
-        DEBUG && console.debug(`Filling el #${id}:`, el);
+        Object.keys(Content).forEach(id => {
+          const d = gt ? Content[id].translated : Content[id].original; //data
+          const el = $(`#${id}`);
+          DEBUG && console.debug(`Filling el #${id}:`, el);
 
-        d.text && el.text(d.text.c);
-        d.title && el.attr("title", d.title.c); //title
-        d.alt && el.attr("alt", d.alt.c); //alt tag  for img etc
-        d.placeholder && el.attr("placeholder", d.placeholder.c); //placeholder
-      });
+          d.text && el.text(d.text.c);
+          d.title && el.attr("title", d.title.c); //title
+          d.alt && el.attr("alt", d.alt.c); //alt tag  for img etc
+          d.placeholder && el.attr("placeholder", d.placeholder.c); //placeholder
+        });
 
-      //done
-      setTimeout(() => {
-        $("html").attr("state", "loading-done");
-        DEBUG && console.debug("Translation done");
-      }, 99);
-    };
+        //done
+        setTimeout(() => {
+          $("html").attr("state", "loading-done");
+          DEBUG && console.debug("Translation done");
+        }, 99);
+      };
 
-    const u = ($.params.u || location.href).split("?")[0];
-    fetch(`${u}/ex`)
-      .then(res => res.text())
-      .then(t => {
-        initRender(t, done);
-      });
+      const u = ($.params.u || location.href).split("?")[0];
+      fetch(`${u}/ex`)
+        .then(res => res.text())
+        .then(t => {
+          initRender(t, done);
+        });
+    } else {
+       $("html").attr("state", "loading-held");
+      const autoSelect = $("verb-2").attr("title");
+      $("placeholder").html(
+        `<span style="color: red;">${$("verb-1").attr("title")}</span>
+         <u>${autoSelect}</u>`);
+    }
   }, 999);
 });
