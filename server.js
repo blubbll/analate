@@ -71,12 +71,12 @@ const exData = {
   1: {
     text: { c: "This is a heading" },
     title: {
-      c: `This is a ${bon} and ${bon} test`,
+      c: `This ${bon} & ${bon} test.`,
       vars: ["cool", "Kristall-Chicken"]
     }
   },
   2: {
-    text: { c: "This is the actual text" }
+    text: { c: "This is the actual text." }
   },
   3: {
     text: { c: "I am a button." },
@@ -89,8 +89,8 @@ const exData = {
     text: { c: `Sample Link to download ${bon}`, vars: ["Bootstrap"] }
   },
   6: {
-    text: { c: `The ${bon} profile of ${bon}`, vars: ["Twitter", "mdo"] },
-    title: { c: `Go to the ${bon} profile of ${bon}`, vars: ["Twitter", "mdo"] }
+    text: { c: `The ${bon} profile of ${bon}.`, vars: ["Twitter", "mdo"] },
+    title: { c: `Go to the ${bon} profile of ${bon}.`, vars: ["Twitter", "mdo"] }
   },
   nav_home: {
     text: { c: "Homepage" },
