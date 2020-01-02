@@ -32,6 +32,11 @@ document.addEventListener("DOMContentLoaded", function(event ) {
         //done
         setTimeout(function()  {
           $("html").attr("state", "loading-done");
+
+          window.top !== window.parent
+            ? $("html").attr("state", "loading-done") //framed
+            : $("html").attr("state", "loading-done-m"); //mframed
+
           DEBUG && console.debug("Translation done");
         }, 99);
       };
@@ -43,7 +48,6 @@ document.addEventListener("DOMContentLoaded", function(event ) {
           initRender(t, done);
         });
     } else {
-      $("html").attr("state", "loading-held");
       var autoSelect = $("verb-2").attr("title");
       $("placeholder").html((("\
 \n       <svg xmlns=\"http://www.w3.org/2000/svg\" viewBox=\"0 0 25 25\" height=\"150\" width=\"150\"><path d=\"M12 0l8 9h-6v15h-4v-15h-6z\"></path></svg>\
@@ -51,6 +55,10 @@ document.addEventListener("DOMContentLoaded", function(event ) {
 \n            <i>" + autoSelect) + ("</i>\
 \n            <i>" + oLanguage) + "</i>\
 \n        "));
+
+      window.top !== window.parent
+        ? $("html").attr("state", "loading-held") //framed
+        : $("html").attr("state", "loading-held-m"); //mframed
     }
   }, 999);
 });

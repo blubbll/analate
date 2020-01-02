@@ -1,15 +1,23 @@
-html[state="loading-done"] {
+html[state="loading-done"],
+html[state="loading-done-m"] {
   & placeholder {
     display: none;
   }
 }
 
-html[state="loading-held"] {
+html[state="loading-held-m"] {
+  & svg {
+    top: 100px!important;
+    left: 22px !important;
+  }
+}
+
+html[state="loading-held"],
+html[state="loading-held-m"] {
   & svg {
     top: -15px;
     left: 245px;
-    position: absolute;
-    position: absolute;
+    position: fixed;
     animation-name: angry-animation;
     animation-duration: 1.5s;
     animation-timing-function: ease;
@@ -60,7 +68,9 @@ html[state="loading-held"] {
 }
 
 html[state="loading"],
-html[state="loading-held"] {
+html[state="loading-held"],
+html[state="loading-held-m"] {
+  height: 100%;
   gtp {
     * {
       padding: 0;

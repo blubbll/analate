@@ -12,24 +12,45 @@
 .gmnoprint {
   display: none; }
 
-#content-wrapper {
+html[state="loading-done"] #content-wrapper {
   display: flex;
   width: 100%;
   height: 100%;
   overflow-y: scroll; }
-  #content-wrapper::-webkit-scrollbar {
+  html[state="loading-done"] #content-wrapper::-webkit-scrollbar {
     width: 12px; }
-  #content-wrapper::-webkit-scrollbar-track {
+  html[state="loading-done"] #content-wrapper::-webkit-scrollbar-track {
     background: #E0E0E0; }
-  #content-wrapper::-webkit-scrollbar-thumb {
+  html[state="loading-done"] #content-wrapper::-webkit-scrollbar-thumb {
     background: #9E9E9E; }
-  #content-wrapper::-webkit-scrollbar-thumb:hover {
+  html[state="loading-done"] #content-wrapper::-webkit-scrollbar-thumb:hover {
     background: #BDBDBD; }
 
-body {
+html[state="loading-done"] body {
   position: absolute;
   width: calc(100% - 30px);
   height: calc(100% - 30px);
+  padding: 1px 0; }
+
+html[state="loading-done-m"] #content-wrapper {
+  display: flex;
+  width: 100%;
+  height: 100%;
+  overflow-y: scroll; }
+  html[state="loading-done-m"] #content-wrapper::-webkit-scrollbar {
+    width: 12px; }
+  html[state="loading-done-m"] #content-wrapper::-webkit-scrollbar-track {
+    background: #E0E0E0; }
+  html[state="loading-done-m"] #content-wrapper::-webkit-scrollbar-thumb {
+    background: #9E9E9E; }
+  html[state="loading-done-m"] #content-wrapper::-webkit-scrollbar-thumb:hover {
+    background: #BDBDBD; }
+
+html[state="loading-done-m"] body {
+  position: absolute !important;
+  top: 106px !important;
+  width: calc(100% - 30px);
+  height: calc(100% - 120px);
   padding: 1px 0; }
 
 #img_cat img {
