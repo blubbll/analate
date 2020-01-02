@@ -10,7 +10,10 @@ document.addEventListener("DOMContentLoaded", function(event ) {
   setTimeout(function()  {
     DEBUG && console.log(("Requested language is:"), $.params.tl);
 
-    if ($.params.sl === "auto") {
+    var oLanguage = $("verb-3").attr("title");
+    var oLanguageShort = $("verb-3").attr("short");
+
+    if ($.params.sl === "auto" || $.params.sl === oLanguageShort) {
       var done = function()  {
         var Content = window.CONTENT;
         var gt = window.wasTranslated();
@@ -40,11 +43,14 @@ document.addEventListener("DOMContentLoaded", function(event ) {
           initRender(t, done);
         });
     } else {
-       $("html").attr("state", "loading-held");
+      $("html").attr("state", "loading-held");
       var autoSelect = $("verb-2").attr("title");
-      $("placeholder").html(
-        (("<span style=\"color: red;\">" + ($("verb-1").attr("title"))) + ("</span>\
-\n         <u>" + autoSelect) + "</u>"));
+      $("placeholder").html((("\
+\n       <svg xmlns=\"http://www.w3.org/2000/svg\" viewBox=\"0 0 25 25\" height=\"150\" width=\"150\"><path d=\"M12 0l8 9h-6v15h-4v-15h-6z\"></path></svg>\
+\n        <span style=\"color: red;\">" + ($("verb-1").attr("title"))) + ("</span>\
+\n            <i>" + autoSelect) + ("</i>\
+\n            <i>" + oLanguage) + "</i>\
+\n        "));
     }
   }, 999);
 });

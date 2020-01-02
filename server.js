@@ -66,12 +66,13 @@ const genHtml = input => {
 </item>
 */
 
-//never use - after a var or in front of a text, also never use two vars after each other
+//never use - after a var or in front of a text, also never use two vars after each other (atleast put a comma or some tested char between them)
+//
 const exData = {
   1: {
     text: { c: "This is a heading" },
     title: {
-      c: `This ${bon} & ${bon} test.`,
+      c: `This is ${bon}. It is a ${bon} test.`,
       vars: ["cool", "Kristall-Chicken"]
     }
   },
