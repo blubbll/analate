@@ -65,23 +65,31 @@ const { DEBUG, $, tippy, alert } = window;
         Object.keys(ELEMENT.original).forEach(key => {
           ELEMENT.original[key].vars &&
             ELEMENT.original[key].vars.forEach(_var => {
-              let c;
               //content
-              c = ELEMENT.original[key].c;
+              const c = ELEMENT.original[key].c;
 
               //if text includes variable
               if (c.includes(bon)) {
                 //replace in original
                 ELEMENT.original[key].c = c.replace(bon, _var);
-
-                if (gt) {
-                  //replace in translated
-                  const c = ELEMENT.translated[key].c;
-                  ELEMENT.translated[key].c = c.replace(bon, _var);
-                }
               }
             });
         });
+
+        gt &&
+          Object.keys(ELEMENT.translated).forEach(key => {
+            ELEMENT.translated[key].vars &&
+              ELEMENT.translated[key].vars.forEach(_var => {
+                //content
+                const c = ELEMENT.translated[key].c;
+
+                //if text includes variable
+                if (c.includes(bon)) {
+                  //replace in translated
+                  ELEMENT.translated[key].c = c.replace(bon, _var);
+                }
+              });
+          });
       });
 
       //put element into correct id

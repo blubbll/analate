@@ -66,23 +66,31 @@ var DEBUG = window.DEBUG, $ = window.$, tippy = window.tippy, alert = window.ale
         Object.keys(ELEMENT.original).forEach(function(key ) {
           ELEMENT.original[key].vars &&
             ELEMENT.original[key].vars.forEach(function(_var ) {
-              var c;
               //content
-              c = ELEMENT.original[key].c;
+              var c = ELEMENT.original[key].c;
 
               //if text includes variable
               if (c.includes(bon)) {
                 //replace in original
                 ELEMENT.original[key].c = c.replace(bon, _var);
-
-                if (gt) {
-                  //replace in translated
-                  var c$0 = ELEMENT.translated[key].c;
-                  ELEMENT.translated[key].c = c$0.replace(bon, _var);
-                }
               }
             });
         });
+
+        gt &&
+          Object.keys(ELEMENT.translated).forEach(function(key ) {
+            ELEMENT.translated[key].vars &&
+              ELEMENT.translated[key].vars.forEach(function(_var ) {
+                //content
+                var c = ELEMENT.translated[key].c;
+
+                //if text includes variable
+                if (c.includes(bon)) {
+                  //replace in translated
+                  ELEMENT.translated[key].c = c.replace(bon, _var);
+                }
+              });
+          });
       });
 
       //put element into correct id
