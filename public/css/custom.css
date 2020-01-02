@@ -31,3 +31,6 @@ body {
   width: calc(100% - 30px);
   height: calc(100% - 30px);
   padding: 1px 0; }
+
+#img_cat img {
+  width: 75vw; }

@@ -61,19 +61,27 @@ const { DEBUG, $, tippy, alert } = window;
         ];
 
         const bon = `🍬`;
-        gt &&
-          Object.keys(ELEMENT.translated).forEach(key => {
-            ELEMENT.translated[`${$(prop).attr("name")}`].vars.forEach(_var => {
+
+        Object.keys(ELEMENT.original).forEach(key => {
+          ELEMENT.original[key].vars &&
+            ELEMENT.original[key].vars.forEach(_var => {
+              let c;
               //content
-              const c = ELEMENT.translated[key].c;
+              c = ELEMENT.original[key].c;
 
               //if text includes variable
               if (c.includes(bon)) {
-                //replace in translated
-                ELEMENT.translated[key].c = c.replace(bon, _var);
+                //replace in original
+                ELEMENT.original[key].c = c.replace(bon, _var);
+
+                if (gt) {
+                  //replace in translated
+                  const c = ELEMENT.translated[key].c;
+                  ELEMENT.translated[key].c = c.replace(bon, _var);
+                }
               }
             });
-          });
+        });
       });
 
       //put element into correct id

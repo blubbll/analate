@@ -62,19 +62,27 @@ var DEBUG = window.DEBUG, $ = window.$, tippy = window.tippy, alert = window.ale
         ];
 
         var bon = ("🍬");
-        gt &&
-          Object.keys(ELEMENT.translated).forEach(function(key ) {
-            ELEMENT.translated[("" + ($(prop).attr("name")))].vars.forEach(function(_var ) {
+
+        Object.keys(ELEMENT.original).forEach(function(key ) {
+          ELEMENT.original[key].vars &&
+            ELEMENT.original[key].vars.forEach(function(_var ) {
+              var c;
               //content
-              var c = ELEMENT.translated[key].c;
+              c = ELEMENT.original[key].c;
 
               //if text includes variable
               if (c.includes(bon)) {
-                //replace in translated
-                ELEMENT.translated[key].c = c.replace(bon, _var);
+                //replace in original
+                ELEMENT.original[key].c = c.replace(bon, _var);
+
+                if (gt) {
+                  //replace in translated
+                  var c$0 = ELEMENT.translated[key].c;
+                  ELEMENT.translated[key].c = c$0.replace(bon, _var);
+                }
               }
             });
-          });
+        });
       });
 
       //put element into correct id
