@@ -23,14 +23,20 @@ app.get("*", (req, res, next) => {
   //res.redirect("https://example.com");
 });
 
-const bon = `🍬`;
+//valid symbols that (probably) dont get eaten by gtranslate:
+//<> ✔️
+const dot = "🇩🇴🇹";
+
+const bon = `<>`;
+
 const genHtml = input => {
   let html = "";
   Object.keys(input).forEach(id => {
     html += `<item data-id="${id}">`;
     const content = input[id];
     Object.keys(content).forEach(prop => {
-      const c = content[prop].c; //content
+      let c = content[prop].c; //content
+      !c.endsWith(".") && [(c = c + dot)]; //varfix
       const vars = content[prop].vars;
 
       html += `<div name="${prop}" title="${c}" class="notranslate">`;
@@ -67,12 +73,13 @@ const genHtml = input => {
 */
 
 //never use - after a var or in front of a text, also never use two vars after each other (atleast put a comma or some tested char between them)
-//
+//never end a sentence with a variable, it will end the google parser before the variable
+//google thinks its a special symbol - just like a dot. use a dot instead, eg our dot variable to end a variable-ending sentence.
 const exData = {
   1: {
     text: { c: "This is a heading" },
     title: {
-      c: `This is ${bon}. It is a ${bon} test.`,
+      c: `This is ${bon}. It is ${bon} test.`,
       vars: ["cool", "Kristall-Chicken"]
     }
   },
@@ -84,17 +91,17 @@ const exData = {
     title: { c: `Click me hard ${bon}`, vars: ["x3"] }
   },
   4: {
-    text: { c: "Sample p Element" }
+    text: { c: "Sample p element" }
   },
   5: {
     text: { c: `Sample Link to download ${bon}`, vars: ["Bootstrap"] }
   },
   6: {
-    text: { c: `The ${bon} profile of ${bon}.`, vars: ["Twitter", "mdo"] },
-    title: { c: `Go to the ${bon} profile of ${bon}.`, vars: ["Twitter", "mdo"] }
+    text: { c: `${bon} ${bon} profile`, vars: ["Twitter", "mdo"] },
+    title: { c: `Go to the ${bon} ${bon} profile.`, vars: ["Twitter", "mdo"] }
   },
   nav_home: {
-    text: { c: "Homepage" },
+    text: { c: "Home page" },
     title: { c: `This is a ${bon} test`, vars: ["cool"] }
   },
   img_cat: {
@@ -117,8 +124,6 @@ ${fs.readFileSync(__dirname + "/old/test.html")}
     title: { c: "This is a Navigation-test" }
   }
 };
-
-
 
 //TRANSPILE es6 js to es5
 const es6tr = require("es6-transpiler");
@@ -169,7 +174,7 @@ app.get("/", (req, res) => {
   //res.sendFile(__dirname + "/views/index.html");
   ejs.renderFile(
     `${__dirname}/views/index.ejs.html`,
-    { data: genHtml(exData) },
+    { data: genHtml(exData), bon },
     (err, str) => {
       err ? console.warn(err) : res.send(str);
     }
@@ -177,7 +182,7 @@ app.get("/", (req, res) => {
 });
 
 app.get("/ex", (req, res) => {
-  res.json(exData)
+  res.json(exData);
 });
 
 // http://expressjs.com/en/starter/basic-routing.html

@@ -3,6 +3,12 @@ const { fetch, alert, DEBUG, $, needRender, initRender, tippy } = window;
 //localized "Translating..."-msg
 $("placeholder").text($("verb-0").attr("title"));
 
+//function to sanitize google-translated stuff
+const saniMod = (input) =>{
+  const dot = "🇩🇴🇹";
+  return input.replace(new RegExp(dot,"gi"), "").trim();
+}
+
 document.addEventListener("DOMContentLoaded", event => {
   setTimeout(console.clear, 499);
 
@@ -22,10 +28,11 @@ document.addEventListener("DOMContentLoaded", event => {
           const el = $(`#${id}`);
           DEBUG && console.debug(`Filling el #${id}:`, el);
 
-          d.text && el.text(d.text.c);
-          d.title && el.attr("title", d.title.c); //title
-          d.alt && el.attr("alt", d.alt.c); //alt tag  for img etc
-          d.placeholder && el.attr("placeholder", d.placeholder.c); //placeholder
+
+          d.text && el.text(saniMod(d.text.c));
+          d.title && el.attr("title", saniMod(d.title.c)); //title
+          d.alt && el.attr("alt", saniMod(d.alt.c)); //alt tag  for img etc
+          d.placeholder && el.attr("placeholder", saniMod(d.placeholder.c)); //placeholder
         });
 
         //done

@@ -149,6 +149,11 @@ html[state="loading-held-m"] {
   html[state="loading-held"] #content-wrapper,
   html[state="loading-held-m"] #content-wrapper {
     display: none; }
+  html[state="loading"] placeholder.rtl,
+  html[state="loading-held"] placeholder.rtl,
+  html[state="loading-held-m"] placeholder.rtl {
+    background: linear-gradient(to left, #eeeeee 10%, #dddddd 18%, #eeeeee 33%);
+    animation-name: placeHolderShimmerRtl !important; }
   html[state="loading"] placeholder,
   html[state="loading-held"] placeholder,
   html[state="loading-held-m"] placeholder {
@@ -177,3 +182,9 @@ html[state="loading-held-m"] {
     background-position: -468px 0; }
   100% {
     background-position: 468px 0; } }
+
+@keyframes placeHolderShimmerRtl {
+  0% {
+    background-position: 468px 0; }
+  100% {
+    background-position: -468px 0; } }

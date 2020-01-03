@@ -1,5 +1,6 @@
 //💜//i love you monad
 var DEBUG = window.DEBUG, $ = window.$, tippy = window.tippy, alert = window.alert;
+$('body[style=";text-align:right;direction:rtl"]').length && $("placeholder").addClass("rtl");
 
 //q
 {
@@ -58,7 +59,9 @@ var DEBUG = window.DEBUG, $ = window.$, tippy = window.tippy, alert = window.ale
           ))
         ];
 
-        var bon = ("🍬");
+        var bon = $("verb-4").attr("title");
+
+        console.log(bon);
 
         Object.keys(ELEMENT.original).forEach(function(key ) {
           ELEMENT.original[key].vars &&

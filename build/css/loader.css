@@ -164,6 +164,15 @@ html[state="loading-held-m"] {
   & #content-wrapper {
     display: none;
   }
+  & placeholder.rtl {
+       background: linear-gradient(
+      to left,
+      #eeeeee 10%,
+      #dddddd 18%,
+      #eeeeee 33%
+    );
+     animation-name: placeHolderShimmerRtl!important;
+  }
   & placeholder {
     text-align: center;
     flex-direction: column;
@@ -198,6 +207,14 @@ html[state="loading-held-m"] {
       }
       100% {
         background-position: 468px 0;
+      }
+    }
+     @keyframes placeHolderShimmerRtl {
+      0% {
+        background-position: 468px 0;
+      }
+      100% {
+        background-position: -468px 0;
       }
     }
   }

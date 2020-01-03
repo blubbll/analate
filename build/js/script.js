@@ -1,4 +1,5 @@
 const { DEBUG, $, tippy, alert } = window;
+$('body[style=";text-align:right;direction:rtl"]').length && $("placeholder").addClass("rtl");
 
 //q
 {
@@ -57,7 +58,9 @@ const { DEBUG, $, tippy, alert } = window;
           ))
         ];
 
-        const bon = `🍬`;
+        const bon = $("verb-4").attr("title");
+
+        console.log(bon);
 
         Object.keys(ELEMENT.original).forEach(key => {
           ELEMENT.original[key].vars &&
