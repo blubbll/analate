@@ -1,0 +1,547 @@
+<!-- This is a static file -->
+<!-- served from your routes in server.js -->
+
+<!-- You might want to try something fancier: -->
+<!-- html/nunjucks docs: https://mozilla.github.io/nunjucks/ -->
+<!-- pug: https://pugjs.org/ -->
+<!-- haml: http://haml.info/ -->
+<!-- hbs(handlebars): http://handlebarsjs.com/ -->
+
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <title>Welcome to Glitch!</title>
+    <meta name="description" content="A cool thing made with Glitch" />
+    <link
+      id="favicon"
+      rel="icon"
+      href="https://glitch.com/edit/favicon-app.ico"
+      type="image/x-icon"
+    />
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    
+    <script src="https://cdn.rawgit.com/beautify-web/js-beautify/v1.10.2/js/lib/beautify-html.js"></script>
+    <script src="./highlight.js"></script>
+    <!-- import the webpage's stylesheet -->
+    <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/npm/turretcss@5.2.1/dist/turretcss.min.css"
+    />
+
+    <link rel="stylesheet" href="./style.css" />
+
+    <meta
+      name="translate"
+      content="https://www.translatetheweb.com/?from=&to=da&dl=de&ref=trb&a=https://antilate.glitch.me/"
+    />
+
+    <!-- import the webpage's client-side javascript file -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+  </head>
+  <body>
+    <header>
+      <div class="container notranslate">
+        <section>
+          <h1>
+            what's trans, dog?
+          </h1>
+        </section>
+
+        <section>
+          <h2 id="colors">L: original | R: transmooked</h2>
+        </section>
+      </div>
+    </header>
+
+    <main class="background-white padding-vertical-xxl">
+      <!---------------------------------->
+      <div class="container">
+        <pre comment class="notranslate">
+          <h3>Simple div test</h3>
+          Hier sehen wir, wie ein einfaches Div von Google mit Inhalt gefüllt wird.
+        </pre>
+        <section>
+          <pre pre>
+            <div>
+            This is a test
+            </div>
+          </pre>
+          <pre pos></pre>
+        </section>
+      </div>
+      <!---->
+      <hr />
+      <br />
+      <!---->
+      <div class="container">
+        <pre comment class="notranslate">
+          <h3>Simple div test (2 layers with span)</h3>
+            Hier sehen wir, was Google mit 2 gestapelten Divs macht.
+        </pre>
+        <section>
+          <pre pre>
+            <div>
+              <div>
+                <span>layer2</span>
+                EMPTY
+                <div>
+                DIV
+                </div>
+                <p>
+                P
+                </p>
+              </div>
+            This is a test
+            </div>
+          </pre>
+          <pre pos></pre>
+        </section>
+      </div>
+      <!---->
+      <hr />
+      <br />
+      <!---->
+      <div class="container">
+        <pre comment class="notranslate">
+            <h3> Simple div test (.notranslate)</h3>
+          </pre>
+        <section>
+          <pre pre>
+            <div class="notranslate">
+            This is a test
+            </div>
+          </pre>
+          <pre pos></pre>
+        </section>
+      </div>
+      <!---->
+      <hr />
+      <br />
+      <!---->
+      <div class="container">
+        <pre comment class="notranslate">
+            <h3>Content & Inline Title inside a notranslate-div?</h3>
+            Title werden trotzdem übersetzt ¯\_(ツ)_/¯
+          </pre>
+        <section>
+          <pre pre>
+            <div class="notranslate" title="This is a Test">
+              <p title="Is this a test?">Yes this is a test</p>
+            </div>
+          </pre>
+          <pre pos></pre>
+        </section>
+      </div>
+      <!---->
+      <hr />
+      <br />
+      <!---->
+      <div class="container">
+        <pre comment class="notranslate">
+            <h3>Give a split to your texter!</h3>
+            Text wird aufgesplitted D:
+          </pre>
+        <section>
+          <pre pre>
+            <div>
+            Toilet paper attack claws fluff everywhere meow miao french ciao litterbox hate dog trip on catnip
+            Meow proudly present butt to human so scream at teh bath.
+            Then cats take over the world kitty pounce, trip, faceplant you didn't see that no you didn't definitely didn't lick, lick, lick, and preen away the embarrassment ccccccccccccaaaaaaaaaaaaaaatttttttttttttttttssssssssssssssss and run in circles, but stand in doorway, unwilling to chose whether to stay in or go out.
+            Cat not kitten around step on your keyboard while you're gaming and then turn in a circle .
+            Shake treat bag i’m so hungry i’m so hungry but ew not for that so pet my belly, you know you want to; seize the hand and shred it! but poop in the plant pot pounce on unsuspecting person.
+            Kitty ipsum dolor sit amet, shed everywhere shed everywhere stretching attack your ankles chase the red dot, hairball run catnip eat the grass sniff kitty run to human with blood on mouth from frenzied attack on poor innocent mouse, don't i look cute? but eat plants, meow, and throw up because i ate plants for stare at the wall, play with food and get confused by dust for cat ass trophy meow in empty rooms.
+            Stare at imaginary bug chase ball of string.
+            Steal the warm chair right after you get up i hate cucumber pls dont throw it at me.
+            Attack feet howl on top of tall thing for eat a plant, kill a hand, eat grass, throw it back up. Who's the baby.
+            </div>
+          </pre>
+          <pre pos></pre>
+        </section>
+      </div>
+      <!---->
+      <hr />
+      <br />
+      <!---->
+      <div class="container">
+        <pre comment class="notranslate">
+            <h3>  Simple "code" test</h3>
+          </pre>
+        <section>
+          <pre pre>
+            <code>
+              Cookie
+            </code>
+          </pre>
+          <pre pos></pre>
+        </section>
+      </div>
+      <!---->
+      <hr />
+      <br />
+      <!---->
+      <div class="container">
+        <pre comment class="notranslate">
+          <h3>Simple "code" test (skiptranslate)</h3>
+        </pre>
+        <section>
+          <pre pre>
+            <div class="skiptranslate">
+              <code>
+                Cookie
+              </code>
+             </div>
+          </pre>
+          <pre pos></pre>
+        </section>
+      </div>
+      <!---->
+      <hr />
+      <br />
+      <!---->
+      <div class="container">
+        <pre comment class="notranslate">
+          <h3>Simple "marquee" test</h3>
+        </pre>
+        <section>
+          <pre pre>
+            <marquee>Test</marquee>
+          </pre>
+          <pre pos></pre>
+        </section>
+      </div>
+      <!---->
+      <hr />
+      <br />
+      <!---->
+      <div class="container">
+        <pre comment class="notranslate">
+          <h3>
+          Simple "custom html" test
+          </h3>
+        </pre>
+        <section>
+          <pre pre>
+            <t-video>Cookie</t-video>
+          </pre>
+          <pre pos></pre>
+        </section>
+      </div>
+      <!---->
+      <hr />
+      <br />
+      <!---->
+      <div class="container">
+        <pre comment class="notranslate">
+          <h3>
+          Simple "span" test
+          </h3>
+        </pre>
+        <section>
+          <pre pre>
+            <span>
+              Pork
+            </span>
+          </pre>
+          <pre pos></pre>
+        </section>
+      </div>
+      <!---->
+      <hr />
+      <br />
+      <!---->
+      <div class="container">
+        <pre comment class="notranslate">
+          <h3>
+           Simple Link test
+          </h3>
+        </pre>
+        <section>
+          <pre pre>
+            <a href="//example.com">
+              Click me :))
+            </a>
+          </pre>
+          <pre pos></pre>
+        </section>
+      </div>
+      <!---->
+      <hr />
+      <br />
+      <!---->
+      <div class="container">
+        <pre comment class="notranslate">
+          <h3>
+           Simple link in div
+          </h3>
+        </pre>
+        <section>
+          <pre pre>
+            <div>
+              <a href="//example.com">
+                Click me :))
+              </a>
+            </div>
+          </pre>
+          <pre pos></pre>
+        </section>
+      </div>
+      <!---->
+      <hr />
+      <br />
+      <!---->
+      <div class="container">
+        <pre comment class="notranslate">
+          <h3>
+          testlink
+          </h3>
+        </pre>
+        <section>
+          <pre pre>
+            <a class="panel1 cur" href="#"
+              ><span
+                ><span class="nummer">1</span
+                ><span class="titel">Testraße</span></span
+              ></a
+            >
+          </pre>
+          <pre pos></pre>
+        </section>
+      </div>
+      <!---->
+      <hr />
+      <br />
+      <!---->
+      <div class="container notranslate">
+        <pre comment class="notranslate">
+          <h3 class="notranslate">
+          testlink (notranslate)
+          </h3>
+        </pre>
+        <section>
+          <pre pre>
+            <div class="notranslate">
+                <a class="panel1 cur" href="#"
+                  ><span
+                    ><span class="nummer">1</span
+                    ><span class="titel">Testraße</span></span
+                  ></a
+                >
+            </div>
+          </pre>
+          <pre pos></pre>
+        </section>
+      </div>
+      <!---->
+      <hr />
+      <br />
+      <!---->
+      <div class="container">
+        <pre comment class="notranslate">
+          <h3 class="notranslate">
+          testlink (notranslate in a)
+          </h3>
+        </pre>
+        <section>
+          <pre pre>
+            <a class="panel1 cur notranslate" href="#"
+              ><span
+                ><span class="nummer">1</span
+                ><span class="titel">Testraße</span></span
+              ></a
+            >
+          </pre>
+          <pre pos></pre>
+        </section>
+      </div>
+      <!---->
+      <hr />
+      <br />
+      <!---->
+      <div class="container">
+        <pre comment class="notranslate">
+          <h3 class="notranslate">
+          testlink (article)
+          </h3>
+        </pre>
+        <section>
+          <pre pre>
+             <li>
+              <a href="//example.com" title="open article">
+                <div>
+                  <p>05.12.2019</p>
+                  <h4>Erstmals Rückbaugebot erlassen: </h4>
+                  <p>Stadt ordnet den ...</p>
+                </div>
+                <span></span>
+              </a>
+			      </li>
+          </pre>
+          <pre pos></pre>
+        </section>
+      </div>
+      <!---->
+      <hr />
+      <br />
+      <!---->
+      <div class="container">
+        <pre comment class="notranslate">
+          <h3 class="notranslate">
+          testhtml
+          </h3>
+        </pre>
+        <section>
+          <pre pre>
+ <div class="element aktuelles noindex" data-ctrl-geaktuelles="{}">
+	<h3 class="element zwischenueberschrift"><span>Aktuelles</span></h3>
+
+				<ul>
+		
+			<li>
+				<a href="/de/_meta/aktuelles/artikel/40973-doch-noch-restarbeiten-auf-der-horster-strasse" title="Diesen Artikel aufrufen">
+					<div>
+						<p>10.12.2019</p>
+						<h4>Doch noch Restarbeiten auf der Horster Straße: </h4>
+						<p> ...</p>
+					</div>
+					<span></span>
+				</a>
+			</li>
+		
+			<li>
+				<a href="/de/_meta/aktuelles/artikel/40972-hans-sachs-haus-nominiert-als-schoenstes-rathaus" title="Diesen Artikel aufrufen">
+					<div>
+						<p>10.12.2019</p>
+						<h4>Hans-Sachs-Haus nominiert als „schönstes Rathaus“: </h4>
+						<p> ...</p>
+					</div>
+					<span></span>
+				</a>
+			</li>
+		
+			<li>
+				<a href="/de/_meta/aktuelles/artikel/40963-gewerbeabteilung-ist-am-12-dezember-geschlossen" title="Diesen Artikel aufrufen">
+					<div>
+						<p>09.12.2019</p>
+						<h4>Gewerbeabteilung ist am 12. Dezember geschlossen: </h4>
+						<p> ...</p>
+					</div>
+					<span></span>
+				</a>
+			</li>
+		
+			<li>
+				<a href="/de/_meta/aktuelles/artikel/40962-kurt-schumacher-strasse-in-fahrtrichtung-gelsenkirchen-einspurig" title="Diesen Artikel aufrufen">
+					<div>
+						<p>09.12.2019</p>
+						<h4>Kurt-Schumacher-Straße in Fahrtrichtung [...]</h4>
+						<p style="display: none;">Fahrbahnübergänge der Brücke über die Autobahn 2 werden erneuert</p>
+					</div>
+					<span></span>
+				</a>
+			</li>
+		
+			<li>
+				<a href="/de/_meta/aktuelles/artikel/40961-umbau-der-horster-strasse-ist-nahezu-abgeschlossen" title="Diesen Artikel aufrufen">
+					<div>
+						<p>09.12.2019</p>
+						<h4>Umbau der Horster Straße ist nahezu abgeschlossen: </h4>
+						<p> ...</p>
+					</div>
+					<span></span>
+				</a>
+			</li>
+		
+			<li>
+				<a href="/de/_meta/aktuelles/artikel/40944-intensivtaeter-wird-erneut-abgeschoben" title="Diesen Artikel aufrufen">
+					<div>
+						<p>06.12.2019</p>
+						<h4>Intensivtäter wird erneut abgeschoben: </h4>
+						<p>Nach Hinweis ...</p>
+					</div>
+					<span></span>
+				</a>
+			</li>
+		
+			<li>
+				<a href="/de/_meta/aktuelles/artikel/40943-100-balus-foerdern-grundschulkinder-mit-gemuetlichkeit-mit-ruhe-und-gemuetlichkeit" title="Diesen Artikel aufrufen">
+					<div>
+						<p>06.12.2019</p>
+						<h4>100 Balus fördern Grundschulkinder „mit [...]</h4>
+						<p style="display: none;">Gelsenkirchen ist Spitzenreiter!</p>
+					</div>
+					<span></span>
+				</a>
+			</li>
+		
+			<li>
+				<a href="/de/_meta/aktuelles/artikel/40937-verbesserungen-in-der-zulassungsstelle" title="Diesen Artikel aufrufen">
+					<div>
+						<p>06.12.2019</p>
+						<h4>Verbesserungen in der Zulassungsstelle: </h4>
+						<p>Servicepaket ...</p>
+					</div>
+					<span></span>
+				</a>
+			</li>
+		
+			<li>
+				<a href="/de/_meta/aktuelles/artikel/40932-12-dezember-abteilung-gewerbe-geschlossen" title="Diesen Artikel aufrufen">
+					<div>
+						<p>05.12.2019</p>
+						<h4>12. Dezember: Abteilung Gewerbe geschlossen: </h4>
+						<p>Referat ...</p>
+					</div>
+					<span></span>
+				</a>
+			</li>
+		
+			<li>
+				<a href="/de/_meta/aktuelles/artikel/40928-staedtische-kitas-erhalten-sunpass-zertifikat" title="Diesen Artikel aufrufen">
+					<div>
+						<p>05.12.2019</p>
+						<h4>Städtische Kitas erhalten „SunPass-Zertifikat“: </h4>
+						<p> ...</p>
+					</div>
+					<span></span>
+				</a>
+			</li>
+		
+			<li>
+				<a href="/de/_meta/aktuelles/artikel/40927-altersgerecht-und-barrierearm-umbauen" title="Diesen Artikel aufrufen">
+					<div>
+						<p>05.12.2019</p>
+						<h4>Altersgerecht und barrierearm umbauen: </h4>
+						<p> ...</p>
+					</div>
+					<span></span>
+				</a>
+			</li>
+		
+			<li>
+				<a href="/de/_meta/aktuelles/artikel/40926-erstmals-rueckbaugebot-erlassen" title="Diesen Artikel aufrufen">
+					<div>
+						<p>05.12.2019</p>
+						<h4>Erstmals Rückbaugebot erlassen: </h4>
+						<p>Stadt ordnet den ...</p>
+					</div>
+					<span></span>
+				</a>
+			</li>
+		
+			</ul>
+		
+	<div class="bttnzeile">
+		<a href="/de/_meta/aktuelles/artikel/bereich/13-" class="bttn">Alle Nachrichten </a>
+	</div>
+</div>
+          </pre>
+          <pre pos></pre>
+        </section>
+      </div>
+      <!---------------------------------->
+    </main>
+  </body>
+  <script src="/client.js" defer></script>
+</html>
